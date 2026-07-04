@@ -6,7 +6,6 @@
     <meta name="color-scheme" content="light">
     <title>NARGIZ SWEETS MENU</title>
     
-    <!-- ПОДКЛЮЧЕНИЕ PWA -->
     <link rel="manifest" href="manifest.json">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -29,12 +28,27 @@
             color: var(--text-dark);
         }
 
-        /* Шапка с логотипом */
+        /* Обновленная шапка с адаптивным фоновым фото */
         .header {
-            background-color: var(--brand-green); 
+            position: relative;
+            background-image: url('bg1.jpg'); /* Ваше фото фона */
+            background-size: cover;
+            background-position: center;
             text-align: center;
             padding: 25px 10px 20px 10px;
             border-bottom: 3px solid var(--main-red);
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        /* Слой видимости для приглушения фонового фото */
+        .header::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            /* 0.75 — плотность фильтра (чем выше цифра, тем бледнее фото фона) */
+            background-color: rgba(232, 245, 233, 0.75); 
+            z-index: -1;
         }
 
         .logo {
@@ -81,26 +95,26 @@
 
         .categories-nav::-webkit-scrollbar { display: none; }
 
-      .category-btn {
-    background-color: #e8f5e9; /* Светло-зеленый фон для неактивных по умолчанию */
-    color: #1b5e20;            /* Темно-зеленый текст для неактивных */
-    padding: 12px 25px;
-    margin-right: 10px;
-    border-radius: 20px;
-    text-decoration: none;
-    font-size: 14px;
-    font-weight: 700;
-    text-transform: uppercase;
-    border: 1px solid #c8e6c9; 
-    display: inline-block;
-}
+        .category-btn {
+            background-color: #e8f5e9; /* Светло-зеленый фон для неактивных по умолчанию */
+            color: #1b5e20;            /* Темно-зеленый текст для неактивных */
+            padding: 12px 25px;
+            margin-right: 10px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+            border: 1px solid #c8e6c9; 
+            display: inline-block;
+        }
 
-/* Этот блок должен идти строго ниже, чтобы перебивать дефолтный цвет */
-.categories-nav .category-btn.active {
-    background-color: var(--main-red) !important; /* Намертво фиксируем красный фон */
-    border-color: var(--main-red) !important;
-    color: #ffffff !important;                    /* Текст строго белый */
-}
+        /* Приоритетный селектор для активной вкладки (всегда будет красной) */
+        .categories-nav .category-btn.active {
+            background-color: var(--main-red) !important;
+            border-color: var(--main-red) !important;
+            color: #ffffff !important;
+        }
 
         .category-btn.disabled {
             background-color: #f5f5f5;
@@ -448,7 +462,6 @@
         <a href="#" class="category-btn disabled">РОЛЛЫ <span class="badge">СКОРО</span></a>
     </div>
 
-    <!-- Вкладка PIZZA -->
     <div id="pizza" class="tab-content active">
         <div class="section-title">PIZZA</div>
         <div class="menu-grid">
@@ -495,7 +508,6 @@
         </div>
     </div>
 
-    <!-- Вкладка FASTFOOD -->
     <div id="fastfood" class="tab-content">
         <div class="section-title">FASTFOOD</div>
         <div class="menu-grid">
@@ -522,7 +534,6 @@
         </div>
     </div>
 
-    <!-- Вкладка ДОБАВКИ И СОУСЫ -->
     <div id="sauces" class="tab-content">
         <div class="section-title">ДОБАВКИ И СОУСЫ</div>
         <div class="menu-grid">
@@ -569,7 +580,6 @@
         </div>
     </div>
 
-    <!-- Вкладка ГОРЯЧИЕ НАПИТКИ -->
     <div id="hot-drinks" class="tab-content">
         <div class="section-title">ГОРЯЧИЕ НАПИТКИ</div>
         <div class="menu-grid">
@@ -596,7 +606,6 @@
         </div>
     </div>
 
-    <!-- Вкладка ХОЛОДНЫЕ НАПИТКИ -->
     <div id="cold-drinks" class="tab-content">
         <div class="section-title">ХОЛОДНЫЕ НАПИТКИ</div>
         <div class="menu-grid">
@@ -613,12 +622,10 @@
         </div>
     </div>
 
-    <!-- КНОПКА КОРЗИНЫ -->
     <button class="floating-cart-btn" onclick="openCart()">
         <span>🛒</span> <span id="cart-counter">(0)</span>
     </button>
 
-    <!-- ОКНО КОРЗИНЫ -->
     <div id="cartModal" class="cart-modal">
         <div class="cart-modal-content">
             <div class="cart-modal-header">
@@ -630,7 +637,6 @@
         </div>
     </div>
 
-    <!-- ОКНО ПОДТВЕРЖДЕНИЯ -->
     <div id="confirmModal" class="confirm-modal">
         <div class="confirm-box">
             <h4>Ochirish / Очистить?</h4>
