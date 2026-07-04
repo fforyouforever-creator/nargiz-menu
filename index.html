@@ -82,8 +82,8 @@
         .categories-nav::-webkit-scrollbar { display: none; }
 
         .category-btn {
-            background-color: #e8f5e9; /* Светло-зеленый фон для неактивных по умолчанию */
-            color: #1b5e20;            /* Темно-зеленый текст для неактивных */
+            background-color: #e8f5e9; 
+            color: #1b5e20;            
             padding: 12px 25px;
             margin-right: 10px;
             border-radius: 20px;
@@ -467,7 +467,7 @@
         <a href="#" class="category-btn disabled">РОЛЛЫ <span class="badge">СКОРО</span></a>
     </div>
 
-    <!-- 1. Вкладка PIZZA (Ровно 12 готовых блюд) -->
+    <!-- 1. Вкладка PIZZA (Здесь ровно 12 пицц от N1 до N12) -->
     <div id="pizza" class="tab-content active">
         <div class="section-title">PIZZA</div>
         <div class="menu-grid">
@@ -606,7 +606,7 @@
         </div>
     </div>
 
-    <!-- 2. Вкладка FASTFOOD (1 Шаблон-заглушка) -->
+    <!-- 2. Вкладка FASTFOOD (2 Шаблона) -->
     <div id="fastfood" class="tab-content">
         <div class="section-title">FASTFOOD</div>
         <div class="menu-grid">
@@ -615,15 +615,25 @@
                 <div class="card-info">
                     <div class="price-row">
                         <div class="item-price">35 000 so'm</div>
-                        <button class="btn-add-cart" onclick="addToCart('НАЗВАНИЕ ФАСТФУДА', 'FASTFOOD')">+</button>
+                        <button class="btn-add-cart" onclick="addToCart('FASTFOOD ШАБЛОН 1', 'FASTFOOD')">+</button>
                     </div>
-                    <div class="item-name">НАЗВАНИЕ ФАСТФУДА</div>
+                    <div class="item-name">FASTFOOD ШАБЛОН 1</div>
+                </div>
+            </div>
+            <div class="menu-card">
+                <div class="img-placeholder">Место для фото<br>(Замените этот блок на &lt;img src="ваш_файл.jpg"&gt;)</div>
+                <div class="card-info">
+                    <div class="price-row">
+                        <div class="item-price">40 000 so'm</div>
+                        <button class="btn-add-cart" onclick="addToCart('FASTFOOD ШАБЛОН 2', 'FASTFOOD')">+</button>
+                    </div>
+                    <div class="item-name">FASTFOOD ШАБЛОН 2</div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- 3. Вкладка ДОБАВКИ И СОУСЫ (1 Шаблон-заглушка) -->
+    <!-- 3. Вкладка ДОБАВКИ И СОУСЫ (2 Шаблона) -->
     <div id="sauces" class="tab-content">
         <div class="section-title">ДОБАВКИ И СОУСЫ</div>
         <div class="menu-grid">
@@ -632,15 +642,25 @@
                 <div class="card-info">
                     <div class="price-row">
                         <div class="item-price">5 000 so'm</div>
-                        <button class="btn-add-cart" onclick="addToCart('НАЗВАНИЕ СОУСА', 'ДОБАВКИ И СОУСЫ')">+</button>
+                        <button class="btn-add-cart" onclick="addToCart('СОУС ШАБЛОН 1', 'ДОБАВКИ И СОУСЫ')">+</button>
                     </div>
-                    <div class="item-name">НАЗВАНИЕ СОУСА</div>
+                    <div class="item-name">СОУС ШАБЛОН 1</div>
+                </div>
+            </div>
+            <div class="menu-card">
+                <div class="img-placeholder">Место для фото<br>(Замените этот блок на &lt;img src="ваш_файл.jpg"&gt;)</div>
+                <div class="card-info">
+                    <div class="price-row">
+                        <div class="item-price">5 000 so'm</div>
+                        <button class="btn-add-cart" onclick="addToCart('СОУС ШАБЛОН 2', 'ДОБАВКИ И СОУСЫ')">+</button>
+                    </div>
+                    <div class="item-name">СОУС ШАБЛОН 2</div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- 4. Вкладка ГОРЯЧИЕ НАПИТКИ (1 Шаблон-заглушка) -->
+    <!-- 4. Вкладка ГОРЯЧИЕ НАПИТКИ (2 Шаблона) -->
     <div id="hot-drinks" class="tab-content">
         <div class="section-title">ГОРЯЧИЕ НАПИТКИ</div>
         <div class="menu-grid">
@@ -649,15 +669,25 @@
                 <div class="card-info">
                     <div class="price-row">
                         <div class="item-price">15 000 so'm</div>
-                        <button class="btn-add-cart" onclick="addToCart('НАЗВАНИЕ НАПИТКА', 'ГОРЯЧИЕ НАПИТКИ')">+</button>
+                        <button class="btn-add-cart" onclick="addToCart('ГОРЯЧИЙ НАПИТОК 1', 'ГОРЯЧИЕ НАПИТКИ')">+</button>
                     </div>
-                    <div class="item-name">НАЗВАНИЕ НАПИТКА</div>
+                    <div class="item-name">ГОРЯЧИЙ НАПИТКОК 1</div>
+                </div>
+            </div>
+            <div class="menu-card">
+                <div class="img-placeholder">Место для фото<br>(Замените этот блок на &lt;img src="ваш_файл.jpg"&gt;)</div>
+                <div class="card-info">
+                    <div class="price-row">
+                        <div class="item-price">18 000 so'm</div>
+                        <button class="btn-add-cart" onclick="addToCart('ГОРЯЧИЙ НАПИТОК 2', 'ГОРЯЧИЕ НАПИТКИ')">+</button>
+                    </div>
+                    <div class="item-name">ГОРЯЧИЙ НАПИТОК 2</div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- 5. Вкладка ХОЛОДНЫЕ НАПИТКИ (1 Шаблон-заглушка) -->
+    <!-- 5. Вкладка ХОЛОДНЫЕ НАПИТКИ (2 Шаблона) -->
     <div id="cold-drinks" class="tab-content">
         <div class="section-title">ХОЛОДНЫЕ НАПИТКИ</div>
         <div class="menu-grid">
@@ -666,9 +696,19 @@
                 <div class="card-info">
                     <div class="price-row">
                         <div class="item-price">12 000 so'm</div>
-                        <button class="btn-add-cart" onclick="addToCart('НАЗВАНИЕ ХОЛОДНОГО НАПИТКА', 'ХОЛОДНЫЕ НАПИТКИ')">+</button>
+                        <button class="btn-add-cart" onclick="addToCart('ХОЛОДНЫЙ НАПИТОК 1', 'ХОЛОДНЫЕ НАПИТКИ')">+</button>
                     </div>
-                    <div class="item-name">НАЗВАНИЕ НАПИТКА</div>
+                    <div class="item-name">ХОЛОДНЫЙ НАПИТОК 1</div>
+                </div>
+            </div>
+            <div class="menu-card">
+                <div class="img-placeholder">Место для фото<br>(Замените этот блок на &lt;img src="ваш_файл.jpg"&gt;)</div>
+                <div class="card-info">
+                    <div class="price-row">
+                        <div class="item-price">15 000 so'm</div>
+                        <button class="btn-add-cart" onclick="addToCart('ХОЛОДНЫЙ НАПИТОК 2', 'ХОЛОДНЫЕ НАПИТКИ')">+</button>
+                    </div>
+                    <div class="item-name">ХОЛОДНЫЙ НАПИТОК 2</div>
                 </div>
             </div>
         </div>
@@ -705,7 +745,6 @@
 
     <!-- СКРИПТЫ -->
     <script>
-        // Регистрация Service Worker для PWA
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
                 navigator.serviceWorker.register('sw.js')
