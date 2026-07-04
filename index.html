@@ -27,6 +27,22 @@
             background-color: var(--bg-dark);
             font-family: 'Segoe UI', Roboto, sans-serif;
             color: var(--text-dark);
+            position: relative;
+            min-height: 100vh;
+        }
+
+        /* ЗАДНИЙ ФОН С 50% ВИДИМОСТИ */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-image: url('bg.png'); /* Твой фоновый рисунок */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            opacity: 0.5; /* 50% видимости фона */
+            z-index: -1;
+            pointer-events: none;
         }
 
         /* Шапка с логотипом */
@@ -71,12 +87,13 @@
             display: flex;
             overflow-x: auto;
             white-space: nowrap;
-            background-color: var(--bg-dark); 
+            background-color: rgba(255, 255, 255, 0.9); 
             padding: 15px 10px;
             position: sticky;
             top: 0;
             z-index: 100;
             border-bottom: 1px solid rgba(0,0,0,0.06);
+            backdrop-filter: blur(5px);
         }
 
         .categories-nav::-webkit-scrollbar { display: none; }
@@ -143,6 +160,10 @@
             margin-bottom: 20px;
             text-transform: uppercase;
             color: var(--text-dark); 
+            background-color: rgba(255, 255, 255, 0.7);
+            display: inline-block;
+            padding-right: 15px;
+            border-radius: 0 8px 8px 0;
         }
 
         /* Сетка карточек */
@@ -160,13 +181,14 @@
 
         /* Карточка товара */
         .menu-card {
-            background-color: var(--card-info-bg);
+            background-color: rgba(232, 245, 233, 0.9);
             border-radius: 16px;
             overflow: hidden;
             border: 1px solid #c8e6c9;
             display: flex;
             flex-direction: column;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.04);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.06);
+            backdrop-filter: blur(3px);
         }
 
         .menu-card img {
@@ -194,7 +216,6 @@
         }
 
         .card-info {
-            background-color: var(--card-info-bg);
             padding: 15px 12px;
             display: flex;
             flex-direction: column;
@@ -467,7 +488,7 @@
         <a href="#" class="category-btn disabled">РОЛЛЫ <span class="badge">СКОРО</span></a>
     </div>
 
-    <!-- 1. Вкладка PIZZA (Здесь ровно 12 пицц от N1 до N12) -->
+    <!-- 1. Вкладка PIZZA (Здесь ровно 13 пицц от N1 до N13) -->
     <div id="pizza" class="tab-content active">
         <div class="section-title">PIZZA</div>
         <div class="menu-grid">
@@ -603,10 +624,21 @@
                     <div class="item-name">COMBINED KATTA</div>
                 </div>
             </div>
+            <!-- 13 (Новая пицца) -->
+            <div class="menu-card">
+                <img src="N13.jpg">
+                <div class="card-info">
+                    <div class="price-row">
+                        <div class="item-price">95 000 so'm</div>
+                        <button class="btn-add-cart" onclick="addToCart('PIZZA ШАБЛОН 13', 'PIZZA')">+</button>
+                    </div>
+                    <div class="item-name">PIZZA ШАБЛОН 13</div>
+                </div>
+            </div>
         </div>
     </div>
 
-    <!-- 2. Вкладка FASTFOOD (2 Шаблона) -->
+    <!-- 2. Вкладка FASTFOOD -->
     <div id="fastfood" class="tab-content">
         <div class="section-title">FASTFOOD</div>
         <div class="menu-grid">
@@ -633,7 +665,7 @@
         </div>
     </div>
 
-    <!-- 3. Вкладка ДОБАВКИ И СОУСЫ (2 Шаблона) -->
+    <!-- 3. Вкладка ДОБАВКИ И СОУСЫ -->
     <div id="sauces" class="tab-content">
         <div class="section-title">ДОБАВКИ И СОУСЫ</div>
         <div class="menu-grid">
@@ -660,7 +692,7 @@
         </div>
     </div>
 
-    <!-- 4. Вкладка ГОРЯЧИЕ НАПИТКИ (2 Шаблона) -->
+    <!-- 4. Вкладка ГОРЯЧИЕ НАПИТКИ -->
     <div id="hot-drinks" class="tab-content">
         <div class="section-title">ГОРЯЧИЕ НАПИТКИ</div>
         <div class="menu-grid">
@@ -687,7 +719,7 @@
         </div>
     </div>
 
-    <!-- 5. Вкладка ХОЛОДНЫЕ НАПИТКИ (2 Шаблона) -->
+    <!-- 5. Вкладка ХОЛОДНЫЕ НАПИТКИ -->
     <div id="cold-drinks" class="tab-content">
         <div class="section-title">ХОЛОДНЫЕ НАПИТКИ</div>
         <div class="menu-grid">
