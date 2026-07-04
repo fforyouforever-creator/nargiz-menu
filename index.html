@@ -81,25 +81,26 @@
 
         .categories-nav::-webkit-scrollbar { display: none; }
 
-        .category-btn {
-            background-color: #E8f5e9 !important; 
-            color: var(--text-dark);
-            padding: 12px 25px;
-            margin-right: 10px;
-            border-radius: 20px;
-            text-decoration: none;
-            font-size: 14px;
-            font-weight: 700;
-            text-transform: uppercase;
-            border: 1px solid #c8e6c9; 
-            display: inline-block;
-        }
+      .category-btn {
+    background-color: #e8f5e9; /* Светло-зеленый фон для неактивных по умолчанию */
+    color: #1b5e20;            /* Темно-зеленый текст для неактивных */
+    padding: 12px 25px;
+    margin-right: 10px;
+    border-radius: 20px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    border: 1px solid #c8e6c9; 
+    display: inline-block;
+}
 
-        .category-btn.active {
-            background-color: var(--main-red);
-            border-color: var(--main-red);
-            color: #ffffff;
-        }
+/* Этот блок должен идти строго ниже, чтобы перебивать дефолтный цвет */
+.categories-nav .category-btn.active {
+    background-color: var(--main-red) !important; /* Намертво фиксируем красный фон */
+    border-color: var(--main-red) !important;
+    color: #ffffff !important;                    /* Текст строго белый */
+}
 
         .category-btn.disabled {
             background-color: #f5f5f5;
