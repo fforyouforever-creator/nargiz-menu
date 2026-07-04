@@ -95,11 +95,11 @@
             display: inline-block;
         }
 
-        /* Этот блок должен идти строго ниже, чтобы перебивать дефолтный цвет */
+        /* Активный таб меню */
         .categories-nav .category-btn.active {
-            background-color: var(--main-red) !important; /* Намертво фиксируем красный фон */
+            background-color: var(--main-red) !important; 
             border-color: var(--main-red) !important;
-            color: #ffffff !important;                    /* Текст строго белый */
+            color: #ffffff !important;                    
         }
 
         .category-btn.disabled {
@@ -173,7 +173,24 @@
             width: 100%;
             height: 150px;
             object-fit: cover;
-            background-color: #f5f5f5;
+            background-color: #eaeaea;
+        }
+
+        /* Заглушка для пустых фото */
+        .img-placeholder {
+            width: 100%;
+            height: 150px;
+            background-color: #e2ebd5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            font-size: 12px;
+            font-weight: bold;
+            color: #5d825f;
+            border-bottom: 1px dashed #abc5ad;
+            box-sizing: border-box;
+            padding: 10px;
         }
 
         .card-info {
@@ -433,12 +450,14 @@
 </head>
 <body>
 
+    <!-- ШАПКА -->
     <div class="header">
         <img src="logo.png" alt="NARGIZ SWEETS" class="logo">
         <div class="restaurant-name">NARGIZ SWEETS</div>
         <button class="call-waiter-btn">XUSH KELIBSIZ!</button>
     </div>
 
+    <!-- ВЕРХНЯЯ НАВИГАЦИЯ (ТАБЫ) -->
     <div class="categories-nav">
         <a href="#" class="category-btn active" data-tab="pizza">PIZZA</a>
         <a href="#" class="category-btn" data-tab="fastfood">FASTFOOD</a>
@@ -448,10 +467,11 @@
         <a href="#" class="category-btn disabled">РОЛЛЫ <span class="badge">СКОРО</span></a>
     </div>
 
-    <!-- Вкладка PIZZA -->
+    <!-- 1. Вкладка PIZZA (Ровно 12 готовых блюд) -->
     <div id="pizza" class="tab-content active">
         <div class="section-title">PIZZA</div>
         <div class="menu-grid">
+            <!-- 1 -->
             <div class="menu-card">
                 <img src="N1.jpg">
                 <div class="card-info">
@@ -462,6 +482,7 @@
                     <div class="item-name">MARGARITA KATTA</div>
                 </div>
             </div>
+            <!-- 2 -->
             <div class="menu-card">
                 <img src="N2.jpg">
                 <div class="card-info">
@@ -472,6 +493,7 @@
                     <div class="item-name">PEPERONI KICHKINA</div>
                 </div>
             </div>
+            <!-- 3 -->
             <div class="menu-card">
                 <img src="N3.jpg">
                 <div class="card-info">
@@ -482,6 +504,7 @@
                     <div class="item-name">MEXIKO O'RTA</div>
                 </div>
             </div>
+            <!-- 4 -->
             <div class="menu-card">
                 <img src="N4.jpg">
                 <div class="card-info">
@@ -492,133 +515,171 @@
                     <div class="item-name">MEXICO KATTA</div>
                 </div>
             </div>
-        </div>
-    </div>
-
-    <!-- Вкладка FASTFOOD -->
-    <div id="fastfood" class="tab-content">
-        <div class="section-title">FASTFOOD</div>
-        <div class="menu-grid">
+            <!-- 5 -->
             <div class="menu-card">
                 <img src="N5.jpg">
                 <div class="card-info">
                     <div class="price-row">
-                        <div class="item-price">45 000 so'm</div>
-                        <button class="btn-add-cart" onclick="addToCart('DREAM BURGER KATTA', 'FASTFOOD')">+</button>
+                        <div class="item-price">55 000 so'm</div>
+                        <button class="btn-add-cart" onclick="addToCart('FOUR CHEESE KICHKINA', 'PIZZA')">+</button>
                     </div>
-                    <div class="item-name">DREAM BURGER KATTA</div>
+                    <div class="item-name">FOUR CHEESE KICHKINA</div>
                 </div>
             </div>
+            <!-- 6 -->
             <div class="menu-card">
                 <img src="N6.jpg">
                 <div class="card-info">
                     <div class="price-row">
-                        <div class="item-price">38 000 so'm</div>
-                        <button class="btn-add-cart" onclick="addToCart('CHIZBURGER ORTA', 'FASTFOOD')">+</button>
+                        <div class="item-price">75 000 so'm</div>
+                        <button class="btn-add-cart" onclick="addToCart('FOUR CHEESE KATTA', 'PIZZA')">+</button>
                     </div>
-                    <div class="item-name">CHIZBURGER ORTA</div>
+                    <div class="item-name">FOUR CHEESE KATTA</div>
                 </div>
             </div>
-        </div>
-    </div>
-
-    <!-- Вкладка ДОБАВКИ И СОУСЫ -->
-    <div id="sauces" class="tab-content">
-        <div class="section-title">ДОБАВКИ И СОУСЫ</div>
-        <div class="menu-grid">
+            <!-- 7 -->
             <div class="menu-card">
                 <img src="N7.jpg">
                 <div class="card-info">
                     <div class="price-row">
-                        <div class="item-price">5 000 so'm</div>
-                        <button class="btn-add-cart" onclick="addToCart('SIRNIY SOUS', 'ДОБАВКИ И СОУСЫ')">+</button>
+                        <div class="item-price">65 000 so'm</div>
+                        <button class="btn-add-cart" onclick="addToCart('CHICKEN BBQ O\'RTA', 'PIZZA')">+</button>
                     </div>
-                    <div class="item-name">SIRNIY SOUS</div>
+                    <div class="item-name">CHICKEN BBQ O'RTA</div>
                 </div>
             </div>
+            <!-- 8 -->
             <div class="menu-card">
                 <img src="N8.jpg">
                 <div class="card-info">
                     <div class="price-row">
-                        <div class="item-price">5 000 so'm</div>
-                        <button class="btn-add-cart" onclick="addToCart('KETCHUP', 'ДОБАВКИ И СОУСЫ')">+</button>
+                        <div class="item-price">85 000 so'm</div>
+                        <button class="btn-add-cart" onclick="addToCart('CHICKEN BBQ KATTA', 'PIZZA')">+</button>
                     </div>
-                    <div class="item-name">KETCHUP</div>
+                    <div class="item-name">CHICKEN BBQ KATTA</div>
                 </div>
             </div>
+            <!-- 9 -->
             <div class="menu-card">
                 <img src="N9.jpg">
                 <div class="card-info">
                     <div class="price-row">
-                        <div class="item-price">5 000 so'm</div>
-                        <button class="btn-add-cart" onclick="addToCart('BARBEKYU SOUS', 'ДОБАВКИ И СОУСЫ')">+</button>
+                        <div class="item-price">58 000 so'm</div>
+                        <button class="btn-add-cart" onclick="addToCart('VEGETARIAN O\'RTA', 'PIZZA')">+</button>
                     </div>
-                    <div class="item-name">BARBEKYU SOUS</div>
+                    <div class="item-name">VEGETARIAN O'RTA</div>
                 </div>
             </div>
+            <!-- 10 -->
             <div class="menu-card">
-                <img src="10.jpg">
+                <img src="N10.jpg">
                 <div class="card-info">
                     <div class="price-row">
-                        <div class="item-price">5 000 so'm</div>
-                        <button class="btn-add-cart" onclick="addToCart('MAYONEZ', 'ДОБАВКИ И СОУСЫ')">+</button>
+                        <div class="item-price">78 000 so'm</div>
+                        <button class="btn-add-cart" onclick="addToCart('VEGETARIAN KATTA', 'PIZZA')">+</button>
                     </div>
-                    <div class="item-name">MAYONEZ</div>
+                    <div class="item-name">VEGETARIAN KATTA</div>
                 </div>
             </div>
-        </div>
-    </div>
-
-    <!-- Вкладка ГОРЯЧИЕ НАПИТКИ -->
-    <div id="hot-drinks" class="tab-content">
-        <div class="section-title">ГОРЯЧИЕ НАПИТКИ</div>
-        <div class="menu-grid">
+            <!-- 11 -->
             <div class="menu-card">
                 <img src="N11.jpg">
                 <div class="card-info">
                     <div class="price-row">
-                        <div class="item-price">15 000 so'm</div>
-                        <button class="btn-add-cart" onclick="addToCart('AMERICANO', 'ГОРЯЧИЕ НАПИТКИ')">+</button>
+                        <div class="item-price">70 000 so'm</div>
+                        <button class="btn-add-cart" onclick="addToCart('COMBINED O\'RTA', 'PIZZA')">+</button>
                     </div>
-                    <div class="item-name">AMERICANO</div>
+                    <div class="item-name">COMBINED O'RTA</div>
                 </div>
             </div>
+            <!-- 12 -->
             <div class="menu-card">
                 <img src="N12.jpg">
                 <div class="card-info">
                     <div class="price-row">
-                        <div class="item-price">18 000 so'm</div>
-                        <button class="btn-add-cart" onclick="addToCart('CAPPUCCINO', 'ГОРЯЧИЕ НАПИТКИ')">+</button>
+                        <div class="item-price">90 000 so'm</div>
+                        <button class="btn-add-cart" onclick="addToCart('COMBINED KATTA', 'PIZZA')">+</button>
                     </div>
-                    <div class="item-name">CAPPUCCINO</div>
+                    <div class="item-name">COMBINED KATTA</div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Вкладка ХОЛОДНЫЕ НАПИТКИ -->
+    <!-- 2. Вкладка FASTFOOD (1 Шаблон-заглушка) -->
+    <div id="fastfood" class="tab-content">
+        <div class="section-title">FASTFOOD</div>
+        <div class="menu-grid">
+            <div class="menu-card">
+                <div class="img-placeholder">Место для фото<br>(Замените этот блок на &lt;img src="ваш_файл.jpg"&gt;)</div>
+                <div class="card-info">
+                    <div class="price-row">
+                        <div class="item-price">35 000 so'm</div>
+                        <button class="btn-add-cart" onclick="addToCart('НАЗВАНИЕ ФАСТФУДА', 'FASTFOOD')">+</button>
+                    </div>
+                    <div class="item-name">НАЗВАНИЕ ФАСТФУДА</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 3. Вкладка ДОБАВКИ И СОУСЫ (1 Шаблон-заглушка) -->
+    <div id="sauces" class="tab-content">
+        <div class="section-title">ДОБАВКИ И СОУСЫ</div>
+        <div class="menu-grid">
+            <div class="menu-card">
+                <div class="img-placeholder">Место для фото<br>(Замените этот блок на &lt;img src="ваш_файл.jpg"&gt;)</div>
+                <div class="card-info">
+                    <div class="price-row">
+                        <div class="item-price">5 000 so'm</div>
+                        <button class="btn-add-cart" onclick="addToCart('НАЗВАНИЕ СОУСА', 'ДОБАВКИ И СОУСЫ')">+</button>
+                    </div>
+                    <div class="item-name">НАЗВАНИЕ СОУСА</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 4. Вкладка ГОРЯЧИЕ НАПИТКИ (1 Шаблон-заглушка) -->
+    <div id="hot-drinks" class="tab-content">
+        <div class="section-title">ГОРЯЧИЕ НАПИТКИ</div>
+        <div class="menu-grid">
+            <div class="menu-card">
+                <div class="img-placeholder">Место для фото<br>(Замените этот блок на &lt;img src="ваш_файл.jpg"&gt;)</div>
+                <div class="card-info">
+                    <div class="price-row">
+                        <div class="item-price">15 000 so'm</div>
+                        <button class="btn-add-cart" onclick="addToCart('НАЗВАНИЕ НАПИТКА', 'ГОРЯЧИЕ НАПИТКИ')">+</button>
+                    </div>
+                    <div class="item-name">НАЗВАНИЕ НАПИТКА</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 5. Вкладка ХОЛОДНЫЕ НАПИТКИ (1 Шаблон-заглушка) -->
     <div id="cold-drinks" class="tab-content">
         <div class="section-title">ХОЛОДНЫЕ НАПИТКИ</div>
         <div class="menu-grid">
             <div class="menu-card">
-                <img src="N13.jpg">
+                <div class="img-placeholder">Место для фото<br>(Замените этот блок на &lt;img src="ваш_файл.jpg"&gt;)</div>
                 <div class="card-info">
                     <div class="price-row">
-                        <div class="item-price">10 000 so'm</div>
-                        <button class="btn-add-cart" onclick="addToCart('COCA-COLA 0.5', 'ХОЛОДНЫЕ НАПИТКИ')">+</button>
+                        <div class="item-price">12 000 so'm</div>
+                        <button class="btn-add-cart" onclick="addToCart('НАЗВАНИЕ ХОЛОДНОГО НАПИТКА', 'ХОЛОДНЫЕ НАПИТКИ')">+</button>
                     </div>
-                    <div class="item-name">COCA-COLA 0.5</div>
+                    <div class="item-name">НАЗВАНИЕ НАПИТКА</div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- КНОПКА КОРЗИНЫ -->
+    <!-- ПЛАВАЮЩАЯ КНОПКА КОРЗИНЫ -->
     <button class="floating-cart-btn" onclick="openCart()">
         <span>🛒</span> <span id="cart-counter">(0)</span>
     </button>
 
-    <!-- ОКНО КОРЗИНЫ -->
+    <!-- МОДАЛЬНОЕ ОКНО КОРЗИНЫ -->
     <div id="cartModal" class="cart-modal">
         <div class="cart-modal-content">
             <div class="cart-modal-header">
@@ -630,7 +691,7 @@
         </div>
     </div>
 
-    <!-- ОКНО ПОДТВЕРЖДЕНИЯ -->
+    <!-- ОКНО ПОДТВЕРЖДЕНИЯ ОЧИСТКИ -->
     <div id="confirmModal" class="confirm-modal">
         <div class="confirm-box">
             <h4>Ochirish / Очистить?</h4>
@@ -642,17 +703,18 @@
         </div>
     </div>
 
+    <!-- СКРИПТЫ -->
     <script>
-        // РЕГИСТРАЦИЯ СЕРВИС-ВОРКЕРА ДЛЯ PWA
+        // Регистрация Service Worker для PWA
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
                 navigator.serviceWorker.register('sw.js')
-                    .then(reg => console.log('PWA Service Worker зарегистрирован успешно!', reg))
-                    .catch(err => console.log('Ошибка при регистрации Service Worker:', err));
+                    .then(reg => console.log('PWA SW запущен успешно!'))
+                    .catch(err => console.log('Ошибка SW:', err));
             });
         }
 
-        // --- Логика табов ---
+        // Переключение табов меню
         const buttons = document.querySelectorAll('.category-btn:not(.disabled)');
         const contents = document.querySelectorAll('.tab-content');
 
@@ -667,7 +729,7 @@
             });
         });
 
-        // --- Логика Корзины ---
+        // Логика работы корзины
         let cart = JSON.parse(localStorage.getItem('menu_cart')) || [];
 
         function saveCart() {
