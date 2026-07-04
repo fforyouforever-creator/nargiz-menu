@@ -31,19 +31,18 @@
             min-height: 100vh;
         }
 
-        /* ЗАДНИЙ ФОН С 50% ВИДИМОСТИ */
-        body::before {
-            content: "";
-            position: fixed;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background-image: url('bg1.jpg'); /* Твой фоновый рисунок */
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            opacity: 0.5; /* 50% видимости фона */
-            z-index: -1;
-            pointer-events: none;
-        }
+        body, html {
+    margin: 0; padding: 0;
+    /* Картинка накладывается напрямую, а сверху на нее ложится белый полупрозрачный слой 50% */
+    background-image: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)), url('bg1.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed; /* Чтобы фон не дергался при скролле */
+    font-family: 'Segoe UI', Roboto, sans-serif;
+    color: var(--text-dark);
+    min-height: 100vh;
+}
 
         /* Шапка с логотипом */
         .header {
