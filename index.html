@@ -82,7 +82,7 @@
         .categories-nav::-webkit-scrollbar { display: none; }
 
         .category-btn {
-            background-color: #9acd32; 
+            background-color: #ffffff !important; /* Принудительно делаем кнопки белыми */
             color: var(--text-dark);
             padding: 12px 25px;
             margin-right: 10px;
@@ -91,7 +91,8 @@
             font-size: 14px;
             font-weight: 700;
             text-transform: uppercase;
-            border: 1px solid #dcedc8;
+            border: 1px solid #c8e6c9; /* Мягкая рамка, чтобы кнопка выделялась */
+            display: inline-block;
         }
 
         .category-btn.active {
