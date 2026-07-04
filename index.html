@@ -82,7 +82,7 @@
         .categories-nav::-webkit-scrollbar { display: none; }
 
         .category-btn {
-            background-color: #ffffff !important; /* Принудительно делаем кнопки белыми */
+            background-color: #ffffff !important; 
             color: var(--text-dark);
             padding: 12px 25px;
             margin-right: 10px;
@@ -91,7 +91,7 @@
             font-size: 14px;
             font-weight: 700;
             text-transform: uppercase;
-            border: 1px solid #c8e6c9; /* Мягкая рамка, чтобы кнопка выделялась */
+            border: 1px solid #c8e6c9; 
             display: inline-block;
         }
 
@@ -101,7 +101,6 @@
             color: #ffffff;
         }
 
-        /* Вкладка РОЛЛЫ */
         .category-btn.disabled {
             background-color: #f5f5f5;
             color: #bcaaa4;
@@ -125,7 +124,7 @@
             letter-spacing: 0.5px;
         }
 
-        /* ТЕТРАДНЫЙ ЭФФЕКТ */
+        /* КОНТЕНТ ТАБОВ */
         .tab-content {
             display: none;
             padding: 25px 15px;
@@ -145,11 +144,17 @@
             color: var(--text-dark); 
         }
 
-        /* Сетка в 2 колонки */
+        /* Сетка карточек */
         .menu-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 15px;
+        }
+
+        @media(max-width: 400px) {
+            .menu-grid {
+                grid-template-columns: 1fr;
+            }
         }
 
         /* Карточка товара */
@@ -165,13 +170,11 @@
 
         .menu-card img {
             width: 100%;
-            height: 180px;
+            height: 150px;
             object-fit: cover;
             background-color: #f5f5f5;
-            border-radius: 0; 
         }
 
-        /* Блок с названием и ценой блюда */
         .card-info {
             background-color: var(--card-info-bg);
             padding: 15px 12px;
@@ -181,7 +184,6 @@
             flex-grow: 1;
         }
 
-        /* Строка цены и кнопки добавления */
         .price-row {
             display: flex;
             align-items: center;
@@ -190,12 +192,11 @@
         }
 
         .item-price {
-            font-size: 18px;
+            font-size: 16px;
             font-weight: bold;
             color: var(--main-red); 
         }
 
-        /* Кнопка добавления в меню */
         .btn-add-cart {
             background-color: var(--main-red);
             color: white;
@@ -217,7 +218,7 @@
         }
 
         .item-name {
-            font-size: 15px;
+            font-size: 14px;
             color: #121212; 
             font-weight: 700;
             line-height: 1.3;
@@ -244,7 +245,7 @@
             gap: 8px;
         }
 
-        /* ОКНО КОРЗИНЫ (МОДАЛКА) */
+        /* МОДАЛКА КОРЗИНЫ */
         .cart-modal {
             position: fixed;
             top: 0; left: 0;
@@ -296,7 +297,6 @@
             padding-right: 5px;
         }
         
-        /* Заголовки категорий внутри корзины */
         .cart-category-group {
             margin-top: 15px;
             margin-bottom: 5px;
@@ -313,7 +313,6 @@
             border-left: 3px solid var(--brand-green);
         }
 
-        /* ЭЛЕМЕНТЫ КОРЗИНЫ */
         .cart-item {
             display: flex;
             justify-content: space-between;
@@ -436,7 +435,7 @@
     <div class="header">
         <img src="logo.png" alt="NARGIZ SWEETS" class="logo">
         <div class="restaurant-name">NARGIZ SWEETS</div>
-        <button class="call-waiter-btn"> XUSH KELIBSIZ!</button>
+        <button class="call-waiter-btn">XUSH KELIBSIZ!</button>
     </div>
 
     <div class="categories-nav">
@@ -492,12 +491,19 @@
                     <div class="item-name">MEXICO KATTA</div>
                 </div>
             </div>
+        </div>
+    </div>
+
+    <!-- Вкладка FASTFOOD -->
+    <div id="fastfood" class="tab-content">
+        <div class="section-title">FASTFOOD</div>
+        <div class="menu-grid">
             <div class="menu-card">
                 <img src="N5.jpg">
                 <div class="card-info">
                     <div class="price-row">
                         <div class="item-price">45 000 so'm</div>
-                        <button class="btn-add-cart" onclick="addToCart('DREAM BURGER KATTA', 'PIZZA')">+</button>
+                        <button class="btn-add-cart" onclick="addToCart('DREAM BURGER KATTA', 'FASTFOOD')">+</button>
                     </div>
                     <div class="item-name">DREAM BURGER KATTA</div>
                 </div>
@@ -507,96 +513,9 @@
                 <div class="card-info">
                     <div class="price-row">
                         <div class="item-price">38 000 so'm</div>
-                        <button class="btn-add-cart" onclick="addToCart('CHIZBURGER ORTA', 'PIZZA')">+</button>
+                        <button class="btn-add-cart" onclick="addToCart('CHIZBURGER ORTA', 'FASTFOOD')">+</button>
                     </div>
                     <div class="item-name">CHIZBURGER ORTA</div>
-                </div>
-            </div>
-            <div class="menu-card">
-                <img src="N7.jpg">
-                <div class="card-info">
-                    <div class="price-row">
-                        <div class="item-price">5 000 so'm</div>
-                        <button class="btn-add-cart" onclick="addToCart('SIRNIY SOUS', 'PIZZA')">+</button>
-                    </div>
-                    <div class="item-name">SIRNIY SOUS</div>
-                </div>
-            </div>
-            <div class="menu-card">
-                <img src="N8.jpg">
-                <div class="card-info">
-                    <div class="price-row">
-                        <div class="item-price">5 000 so'm</div>
-                        <button class="btn-add-cart" onclick="addToCart('KETCHUP', 'PIZZA')">+</button>
-                    </div>
-                    <div class="item-name">KETCHUP</div>
-                </div>
-            </div>
-            <div class="menu-card">
-                <img src="N9.jpg">
-                <div class="card-info">
-                    <div class="price-row">
-                        <div class="item-price">5 000 so'm</div>
-                        <button class="btn-add-cart" onclick="addToCart('BARBEKYU SOUS', 'PIZZA')">+</button>
-                    </div>
-                    <div class="item-name">BARBEKYU SOUS</div>
-                </div>
-            </div>
-            <div class="menu-card">
-                <img src="10.jpg">
-                <div class="card-info">
-                    <div class="price-row">
-                        <div class="item-price">5 000 so'm</div>
-                        <button class="btn-add-cart" onclick="addToCart('MAYONEZ', 'PIZZA')">+</button>
-                    </div>
-                    <div class="item-name">MAYONEZ</div>
-                </div>
-            </div>
-            <div class="menu-card">
-                <img src="N11.jpg">
-                <div class="card-info">
-                    <div class="price-row">
-                        <div class="item-price">15 000 so'm</div>
-                        <button class="btn-add-cart" onclick="addToCart('AMERICANO', 'PIZZA')">+</button>
-                    </div>
-                    <div class="item-name">AMERICANO</div>
-                </div>
-            </div>
-            <div class="menu-card">
-                <img src="N12.jpg">
-                <div class="card-info">
-                    <div class="price-row">
-                        <div class="item-price">18 000 so'm</div>
-                        <button class="btn-add-cart" onclick="addToCart('CAPPUCCINO', 'PIZZA')">+</button>
-                    </div>
-                    <div class="item-name">CAPPUCCINO</div>
-                </div>
-            </div>
-            <div class="menu-card">
-                <img src="N13.jpg">
-                <div class="card-info">
-                    <div class="price-row">
-                        <div class="item-price">10 000 so'm</div>
-                        <button class="btn-add-cart" onclick="addToCart('COCA-COLA 0.5', 'PIZZA')">+</button>
-                    </div>
-                    <div class="item-name">COCA-COLA 0.5</div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Вкладка FASTFOOD -->
-    <div id="fastfood" class="tab-content">
-        <div class="section-title">FASTFOOD</div>
-        <div class="menu-grid">
-            <div class="menu-card">
-                <img src="burger1.jpg">
-                <div class="card-info">
-                    <div class="price-row">
-                        <div class="item-price">45 000 so'm</div>
-                        <button class="btn-add-cart" onclick="addToCart('DREAM BURGER KATTA', 'FASTFOOD')">+</button>
-                    </div>
-                    <div class="item-name">DREAM BURGER KATTA</div>
                 </div>
             </div>
         </div>
@@ -607,13 +526,43 @@
         <div class="section-title">ДОБАВКИ И СОУСЫ</div>
         <div class="menu-grid">
             <div class="menu-card">
-                <img src="sous1.jpg">
+                <img src="N7.jpg">
                 <div class="card-info">
                     <div class="price-row">
                         <div class="item-price">5 000 so'm</div>
                         <button class="btn-add-cart" onclick="addToCart('SIRNIY SOUS', 'ДОБАВКИ И СОУСЫ')">+</button>
                     </div>
                     <div class="item-name">SIRNIY SOUS</div>
+                </div>
+            </div>
+            <div class="menu-card">
+                <img src="N8.jpg">
+                <div class="card-info">
+                    <div class="price-row">
+                        <div class="item-price">5 000 so'm</div>
+                        <button class="btn-add-cart" onclick="addToCart('KETCHUP', 'ДОБАВКИ И СОУСЫ')">+</button>
+                    </div>
+                    <div class="item-name">KETCHUP</div>
+                </div>
+            </div>
+            <div class="menu-card">
+                <img src="N9.jpg">
+                <div class="card-info">
+                    <div class="price-row">
+                        <div class="item-price">5 000 so'm</div>
+                        <button class="btn-add-cart" onclick="addToCart('BARBEKYU SOUS', 'ДОБАВКИ И СОУСЫ')">+</button>
+                    </div>
+                    <div class="item-name">BARBEKYU SOUS</div>
+                </div>
+            </div>
+            <div class="menu-card">
+                <img src="10.jpg">
+                <div class="card-info">
+                    <div class="price-row">
+                        <div class="item-price">5 000 so'm</div>
+                        <button class="btn-add-cart" onclick="addToCart('MAYONEZ', 'ДОБАВКИ И СОУСЫ')">+</button>
+                    </div>
+                    <div class="item-name">MAYONEZ</div>
                 </div>
             </div>
         </div>
@@ -624,13 +573,23 @@
         <div class="section-title">ГОРЯЧИЕ НАПИТКИ</div>
         <div class="menu-grid">
             <div class="menu-card">
-                <img src="coffee1.jpg">
+                <img src="N11.jpg">
                 <div class="card-info">
                     <div class="price-row">
                         <div class="item-price">15 000 so'm</div>
                         <button class="btn-add-cart" onclick="addToCart('AMERICANO', 'ГОРЯЧИЕ НАПИТКИ')">+</button>
                     </div>
                     <div class="item-name">AMERICANO</div>
+                </div>
+            </div>
+            <div class="menu-card">
+                <img src="N12.jpg">
+                <div class="card-info">
+                    <div class="price-row">
+                        <div class="item-price">18 000 so'm</div>
+                        <button class="btn-add-cart" onclick="addToCart('CAPPUCCINO', 'ГОРЯЧИЕ НАПИТКИ')">+</button>
+                    </div>
+                    <div class="item-name">CAPPUCCINO</div>
                 </div>
             </div>
         </div>
@@ -641,7 +600,7 @@
         <div class="section-title">ХОЛОДНЫЕ НАПИТКИ</div>
         <div class="menu-grid">
             <div class="menu-card">
-                <img src="cola1.jpg">
+                <img src="N13.jpg">
                 <div class="card-info">
                     <div class="price-row">
                         <div class="item-price">10 000 so'm</div>
