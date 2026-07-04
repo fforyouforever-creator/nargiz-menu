@@ -6,6 +6,7 @@
     <meta name="color-scheme" content="light">
     <title>NARGIZ SWEETS MENU</title>
     
+    <!-- ПОДКЛЮЧЕНИЕ PWA -->
     <link rel="manifest" href="manifest.json">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -14,33 +15,33 @@
     <style>
         :root {
             --main-red: #b62525;
-            --brand-green: #E8f5e9;    /* ЗЕЛЁНЫЙ ЦВЕТ (Шапка, подложка кнопок) */
+            --brand-green: #E8f5e9;    /* ЗЕЛЁНЫЙ ЦВЕТ (подложка кнопок) */
             --card-info-bg: #E8f5e9;   /* СВЕТЛО-ЗЕЛЕНАЯ ПОДЛОЖКА КАРТОЧЕК */
             --text-dark: #1b5e20;      /* ТЁМНО-ЗЕЛЁНЫЙ ЦВЕТ ТЕКСТА */
             --text-gray: #555555;
+            --bg-dark: #ffffff;
         }
 
-        /* НАДЁЖНОЕ НАЛОЖЕНИЕ ФОНА НА ВСЮ СТРАНИЦУ */
         html, body {
             margin: 0; 
             padding: 0;
             min-height: 100vh;
             font-family: 'Segoe UI', Roboto, sans-serif;
             color: var(--text-dark);
-            /* Белая полупрозрачная маска 50% прямо поверх картинки bg1.jpg */
-            background-image: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)), url('bg1.jpg');
+            background-color: var(--bg-dark);
+        }
+
+        /* КАРТИНКА bg1.jpg ТЕПЕРЬ СТРОГО ТУТ — В ШАПКЕ ЗА ЛОГОТИПОМ */
+        .header {
+            position: relative;
+            text-align: center;
+            padding: 30px 10px 25px 10px;
+            border-bottom: 3px solid var(--main-red);
+            /* Полупрозрачная белая маска поверх bg1.jpg, чтобы логотип и текст хорошо читались */
+            background-image: linear-gradient(rgba(255, 255, 255, 0.45), rgba(255, 255, 255, 0.45)), url('bg1.jpg');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
-            background-attachment: fixed;
-        }
-
-        /* Шапка с логотипом */
-        .header {
-            background-color: var(--brand-green); 
-            text-align: center;
-            padding: 25px 10px 20px 10px;
-            border-bottom: 3px solid var(--main-red);
         }
 
         .logo {
@@ -48,6 +49,8 @@
             height: auto;
             display: block;
             margin: 0 auto 12px auto;
+            position: relative;
+            z-index: 2;
         }
 
         .restaurant-name {
@@ -57,6 +60,8 @@
             margin: 5px 0 12px 0;
             text-transform: uppercase;
             color: #121212;
+            position: relative;
+            z-index: 2;
         }
 
         .call-waiter-btn {
@@ -70,6 +75,8 @@
             font-weight: bold;
             text-transform: uppercase;
             box-shadow: 0 4px 15px rgba(182, 37, 37, 0.4);
+            position: relative;
+            z-index: 2;
         }
 
         /* Кнопки навигации верхнего меню */
@@ -77,7 +84,7 @@
             display: flex;
             overflow-x: auto;
             white-space: nowrap;
-            background-color: rgba(255, 255, 255, 0.85); 
+            background-color: rgba(255, 255, 255, 0.95); 
             padding: 15px 10px;
             position: sticky;
             top: 0;
@@ -133,11 +140,11 @@
             letter-spacing: 0.5px;
         }
 
-        /* КОНТЕНТ ТАБОВ (Фон теперь прозрачный!) */
+        /* КОНТЕНТ ТАБОВ */
         .tab-content {
             display: none;
             padding: 25px 15px;
-            background: transparent; 
+            background-color: #ffffff; 
         }
 
         .tab-content.active {
@@ -152,10 +159,6 @@
             margin-bottom: 20px;
             text-transform: uppercase;
             color: var(--text-dark); 
-            background-color: rgba(255, 255, 255, 0.75);
-            display: inline-block;
-            padding-right: 15px;
-            border-radius: 0 8px 8px 0;
         }
 
         /* Сетка карточек */
@@ -171,17 +174,15 @@
             }
         }
 
-        /* Карточка товара с эффектом размытия заднего фона */
+        /* Карточка товара */
         .menu-card {
-            background-color: rgba(232, 245, 233, 0.92);
+            background-color: var(--card-info-bg);
             border-radius: 16px;
             overflow: hidden;
             border: 1px solid #c8e6c9;
             display: flex;
             flex-direction: column;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.07);
-            backdrop-filter: blur(3px);
-            -webkit-backdrop-filter: blur(3px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
         }
 
         .menu-card img {
@@ -464,12 +465,14 @@
 </head>
 <body>
 
+    <!-- ШАПКА С ФОНОМ ИЗ bg1.jpg ЗА ЛОГОТИПОМ -->
     <div class="header">
         <img src="logo.png" alt="NARGIZ SWEETS" class="logo">
         <div class="restaurant-name">NARGIZ SWEETS</div>
         <button class="call-waiter-btn">XUSH KELIBSIZ!</button>
     </div>
 
+    <!-- ВЕРХНЯЯ НАВИГАЦИЯ (ТАБЫ) -->
     <div class="categories-nav">
         <a href="#" class="category-btn active" data-tab="pizza">PIZZA</a>
         <a href="#" class="category-btn" data-tab="fastfood">FASTFOOD</a>
@@ -479,9 +482,11 @@
         <a href="#" class="category-btn disabled">РОЛЛЫ <span class="badge">СКОРО</span></a>
     </div>
 
+    <!-- 1. Вкладка PIZZA -->
     <div id="pizza" class="tab-content active">
         <div class="section-title">PIZZA</div>
         <div class="menu-grid">
+            <!-- 1 -->
             <div class="menu-card">
                 <img src="N1.jpg">
                 <div class="card-info">
@@ -492,6 +497,7 @@
                     <div class="item-name">MARGARITA KATTA</div>
                 </div>
             </div>
+            <!-- 2 -->
             <div class="menu-card">
                 <img src="N2.jpg">
                 <div class="card-info">
@@ -502,6 +508,7 @@
                     <div class="item-name">PEPERONI KICHKINA</div>
                 </div>
             </div>
+            <!-- 3 -->
             <div class="menu-card">
                 <img src="N3.jpg">
                 <div class="card-info">
@@ -512,6 +519,7 @@
                     <div class="item-name">MEXIKO O'RTA</div>
                 </div>
             </div>
+            <!-- 4 -->
             <div class="menu-card">
                 <img src="N4.jpg">
                 <div class="card-info">
@@ -522,6 +530,7 @@
                     <div class="item-name">MEXICO KATTA</div>
                 </div>
             </div>
+            <!-- 5 -->
             <div class="menu-card">
                 <img src="N5.jpg">
                 <div class="card-info">
@@ -532,6 +541,7 @@
                     <div class="item-name">FOUR CHEESE KICHKINA</div>
                 </div>
             </div>
+            <!-- 6 -->
             <div class="menu-card">
                 <img src="N6.jpg">
                 <div class="card-info">
@@ -542,6 +552,7 @@
                     <div class="item-name">FOUR CHEESE KATTA</div>
                 </div>
             </div>
+            <!-- 7 -->
             <div class="menu-card">
                 <img src="N7.jpg">
                 <div class="card-info">
@@ -552,6 +563,7 @@
                     <div class="item-name">CHICKEN BBQ O'RTA</div>
                 </div>
             </div>
+            <!-- 8 -->
             <div class="menu-card">
                 <img src="N8.jpg">
                 <div class="card-info">
@@ -562,6 +574,7 @@
                     <div class="item-name">CHICKEN BBQ KATTA</div>
                 </div>
             </div>
+            <!-- 9 -->
             <div class="menu-card">
                 <img src="N9.jpg">
                 <div class="card-info">
@@ -572,6 +585,7 @@
                     <div class="item-name">VEGETARIAN O'RTA</div>
                 </div>
             </div>
+            <!-- 10 -->
             <div class="menu-card">
                 <img src="N10.jpg">
                 <div class="card-info">
@@ -582,6 +596,7 @@
                     <div class="item-name">VEGETARIAN KATTA</div>
                 </div>
             </div>
+            <!-- 11 -->
             <div class="menu-card">
                 <img src="N11.jpg">
                 <div class="card-info">
@@ -592,6 +607,7 @@
                     <div class="item-name">COMBINED O'RTA</div>
                 </div>
             </div>
+            <!-- 12 -->
             <div class="menu-card">
                 <img src="N12.jpg">
                 <div class="card-info">
@@ -602,6 +618,7 @@
                     <div class="item-name">COMBINED KATTA</div>
                 </div>
             </div>
+            <!-- 13 -->
             <div class="menu-card">
                 <img src="N13.jpg">
                 <div class="card-info">
@@ -615,6 +632,7 @@
         </div>
     </div>
 
+    <!-- 2. Вкладка FASTFOOD -->
     <div id="fastfood" class="tab-content">
         <div class="section-title">FASTFOOD</div>
         <div class="menu-grid">
@@ -628,19 +646,10 @@
                     <div class="item-name">FASTFOOD ШАБЛОН 1</div>
                 </div>
             </div>
-            <div class="menu-card">
-                <div class="img-placeholder">Место для фото<br>(Замените этот блок на &lt;img src="ваш_файл.jpg"&gt;)</div>
-                <div class="card-info">
-                    <div class="price-row">
-                        <div class="item-price">40 000 so'm</div>
-                        <button class="btn-add-cart" onclick="addToCart('FASTFOOD ШАБЛОН 2', 'FASTFOOD')">+</button>
-                    </div>
-                    <div class="item-name">FASTFOOD ШАБЛОН 2</div>
-                </div>
-            </div>
         </div>
     </div>
 
+    <!-- 3. Вкладка ДОБАВКИ И СОУСЫ -->
     <div id="sauces" class="tab-content">
         <div class="section-title">ДОБАВКИ И СОУСЫ</div>
         <div class="menu-grid">
@@ -654,19 +663,10 @@
                     <div class="item-name">СОУС ШАБЛОН 1</div>
                 </div>
             </div>
-            <div class="menu-card">
-                <div class="img-placeholder">Место для фото<br>(Замените этот блок на &lt;img src="ваш_файл.jpg"&gt;)</div>
-                <div class="card-info">
-                    <div class="price-row">
-                        <div class="item-price">5 000 so'm</div>
-                        <button class="btn-add-cart" onclick="addToCart('СОУС ШАБЛОН 2', 'ДОБАВКИ И СОУСЫ')">+</button>
-                    </div>
-                    <div class="item-name">СОУС ШАБЛОН 2</div>
-                </div>
-            </div>
         </div>
     </div>
 
+    <!-- 4. Вкладка ГОРЯЧИЕ НАПИТКИ -->
     <div id="hot-drinks" class="tab-content">
         <div class="section-title">ГОРЯЧИЕ НАПИТКИ</div>
         <div class="menu-grid">
@@ -680,19 +680,10 @@
                     <div class="item-name">ГОРЯЧИЙ НАПИТКОК 1</div>
                 </div>
             </div>
-            <div class="menu-card">
-                <div class="img-placeholder">Место для фото<br>(Замените этот блок на &lt;img src="ваш_файл.jpg"&gt;)</div>
-                <div class="card-info">
-                    <div class="price-row">
-                        <div class="item-price">18 000 so'm</div>
-                        <button class="btn-add-cart" onclick="addToCart('ГОРЯЧИЙ НАПИТОК 2', 'ГОРЯЧИЕ НАПИТКИ')">+</button>
-                    </div>
-                    <div class="item-name">ГОРЯЧИЙ НАПИТОК 2</div>
-                </div>
-            </div>
         </div>
     </div>
 
+    <!-- 5. Вкладка ХОЛОДНЫЕ НАПИТКИ -->
     <div id="cold-drinks" class="tab-content">
         <div class="section-title">ХОЛОДНЫЕ НАПИТКИ</div>
         <div class="menu-grid">
@@ -706,23 +697,15 @@
                     <div class="item-name">ХОЛОДНЫЙ НАПИТОК 1</div>
                 </div>
             </div>
-            <div class="menu-card">
-                <div class="img-placeholder">Место для фото<br>(Замените этот блок на &lt;img src="ваш_файл.jpg"&gt;)</div>
-                <div class="card-info">
-                    <div class="price-row">
-                        <div class="item-price">15 000 so'm</div>
-                        <button class="btn-add-cart" onclick="addToCart('ХОЛОДНЫЙ НАПИТОК 2', 'ХОЛОДНЫЕ НАПИТКИ')">+</button>
-                    </div>
-                    <div class="item-name">ХОЛОДНЫЙ НАПИТОК 2</div>
-                </div>
-            </div>
         </div>
     </div>
 
+    <!-- ПЛАВАЮЩАЯ КНОПКА КОРЗИНЫ -->
     <button class="floating-cart-btn" onclick="openCart()">
         <span>🛒</span> <span id="cart-counter">(0)</span>
     </button>
 
+    <!-- МОДАЛЬНОЕ ОКНО КОРЗИНЫ -->
     <div id="cartModal" class="cart-modal">
         <div class="cart-modal-content">
             <div class="cart-modal-header">
@@ -734,6 +717,7 @@
         </div>
     </div>
 
+    <!-- ОКНО ПОДТВЕРЖДЕНИЯ ОЧИСТКИ -->
     <div id="confirmModal" class="confirm-modal">
         <div class="confirm-box">
             <h4>Ochirish / Очистить?</h4>
@@ -745,6 +729,7 @@
         </div>
     </div>
 
+    <!-- СКРИПТЫ -->
     <script>
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
