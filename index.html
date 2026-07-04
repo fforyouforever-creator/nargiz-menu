@@ -29,27 +29,12 @@
             color: var(--text-dark);
         }
 
-        /* Обновленная шапка с адаптивным фоновым фото */
+        /* Шапка с логотипом */
         .header {
-            position: relative;
-            background-image: url('bg1.jpg'); /* Ваше фото фона */
-            background-size: cover;
-            background-position: center;
+            background-color: var(--brand-green); 
             text-align: center;
             padding: 25px 10px 20px 10px;
             border-bottom: 3px solid var(--main-red);
-            z-index: 1;
-            overflow: hidden;
-        }
-
-        /* Слой видимости для приглушения фонового фото */
-        .header::before {
-            content: "";
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            /* 0.75 — плотность фильтра (чем выше цифра, тем бледнее фото фона) */
-            background-color: rgba(232, 245, 233, 0.75); 
-            z-index: -1;
         }
 
         .logo {
@@ -110,11 +95,11 @@
             display: inline-block;
         }
 
-        /* Приоритетный селектор для активной вкладки (всегда будет красной) */
+        /* Этот блок должен идти строго ниже, чтобы перебивать дефолтный цвет */
         .categories-nav .category-btn.active {
-            background-color: var(--main-red) !important;
+            background-color: var(--main-red) !important; /* Намертво фиксируем красный фон */
             border-color: var(--main-red) !important;
-            color: #ffffff !important;
+            color: #ffffff !important;                    /* Текст строго белый */
         }
 
         .category-btn.disabled {
@@ -485,6 +470,26 @@
                         <button class="btn-add-cart" onclick="addToCart('PEPERONI KICHKINA', 'PIZZA')">+</button>
                     </div>
                     <div class="item-name">PEPERONI KICHKINA</div>
+                </div>
+            </div>
+            <div class="menu-card">
+                <img src="N3.jpg">
+                <div class="card-info">
+                    <div class="price-row">
+                        <div class="item-price">60 000 so'm</div>
+                        <button class="btn-add-cart" onclick="addToCart('MEXIKO O\'RTA', 'PIZZA')">+</button>
+                    </div>
+                    <div class="item-name">MEXIKO O'RTA</div>
+                </div>
+            </div>
+            <div class="menu-card">
+                <img src="N4.jpg">
+                <div class="card-info">
+                    <div class="price-row">
+                        <div class="item-price">80 000 so'm</div>
+                        <button class="btn-add-cart" onclick="addToCart('MEXICO KATTA', 'PIZZA')">+</button>
+                    </div>
+                    <div class="item-name">MEXICO KATTA</div>
                 </div>
             </div>
         </div>
