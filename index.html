@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="color-scheme" content="light">
+    <title>NARGIZ SWEETS MENU</title>
+    
+    <!-- ПОДКЛЮЧЕНИЕ PWA -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="NARGIZ MENU">
+
+    <style>
+        :root {
+            --main-red: #b62525;
+            --brand-green: #E8f5e9;    /* ЗЕЛЁНЫЙ ЦВЕТ (подложка кнопок) */
+            --card-info-bg: #E8f5e9;   /* СВЕТЛО-ЗЕЛЕНАЯ ПОДЛОЖКА КАРТОЧЕК */
+            --text-dark: #1b5e20;      /* ТЁМНО-ЗЕЛЁНЫЙ ЦВЕТ ТЕКСТА */
+            --text-gray: #555555;
+            --bg-dark: #ffffff;
+        }
+
+        html, body {
+            margin: 0; 
+            padding: 0;
+            min-height: 100vh;
+            font-family: 'Segoe UI', Roboto, sans-serif;
+            color: var(--text-dark);
+            background-color: var(--bg-dark);
+        }
+
+        /* КАРТИНКА bg1.jpg ТЕПЕРЬ СТРОГО ТУТ — В ШАПКЕ ЗА ЛОГОТИПОМ */
+        .header {
+            position: relative;
+            text-align: center;
+            padding: 30px 10px 25px 10px;
+            border-bottom: 3px solid var(--main-red);
+            /* Полупрозрачная белая маска поверх bg1.jpg, чтобы логотип и текст хорошо читались */
+            background-image: linear-gradient(rgba(255, 255, 255, 0.45), rgba(255, 255, 255, 0.45)), url('bg1.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .logo {
+            width: 130px;
+            height: auto;
+            display: block;
+            margin: 0 auto 12px auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .restaurant-name {
+            font-size: 26px;
+            font-weight: 900;
+            letter-spacing: 2px;
+            margin: 5px 0 12px 0;
+            text-transform: uppercase;
+            color: #121212;
+            position: relative;
+            z-index: 2;
+        }
+
+        .call-waiter-btn {
+            background-color: var(--main-red);
+            color: white;
+            border: none;
+            padding: 12px 28px;
+            font-size: 14px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            text-transform: uppercase;
+            box-shadow: 0 4px 15px rgba(182, 37, 37, 0.4);
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Кнопки навигации верхнего меню */
+        .categories-nav {
+            display: flex;
+            overflow-x: auto;
+            white-space: nowrap;
+            background-color: rgba(255, 255, 255, 0.95); 
+            padding: 15px 10px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid rgba(0,0,0,0.06);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+        }
+
+        .categories-nav::-webkit-scrollbar { display: none; }
+
+        .category-btn {
+            background-color: #e8f5e9; 
+            color: #1b5e20;            
+            padding: 12px 25px;
+            margin-right: 10px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+            border: 1px solid #c8e6c9; 
+            display: inline-block;
+        }
+
+        /* Активный таб меню */
+        .categories-nav .category-btn.active {
+            background-color: var(--main-red) !important; 
+            border-color: var(--main-red) !important;
+            color: #ffffff !important;                    
+        }
+
+        .category-btn.disabled {
+            background-color: rgba(245, 245, 245, 0.9);
+            color: #bcaaa4;
+            border-color: #e0e0e0;
+            text-decoration: line-through;
+            pointer-events: none;
+            position: relative;
+        }
+
+        .category-btn.disabled .badge {
+            background-color: #ff9800;
+            color: #fff;
+            font-size: 10px;
+            padding: 2px 6px;
+            border-radius: 10px;
+            position: absolute;
+            top: -10px;
+            right: -5px;
+            text-decoration: none;
+            font-weight: 900;
+            letter-spacing: 0.5px;
+        }
+
+        /* КОНТЕНТ ТАБОВ */
+        .tab-content {
+            display: none;
+            padding: 25px 15px;
+            background-color: #ffffff; 
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .section-title {
+            font-size: 22px;
+            font-weight: bold;
+            border-left: 5px solid var(--main-red);
+            padding-left: 12px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            color: var(--text-dark); 
+        }
+
+        /* Сетка карточек */
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        @media(max-width: 400px) {
+            .menu-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Карточка товара */
+        .menu-card {
+            background-color: var(--card-info-bg);
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid #c8e6c9;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+
+        .menu-card img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            background-color: #eaeaea;
+        }
+
+        /* Заглушка для пустых фото */
+        .img-placeholder {
+            width: 100%;
+            height: 150px;
+            background-color: rgba(226, 235, 213, 0.9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            font-size: 12px;
+            font-weight: bold;
+            color: #5d825f;
+            border-bottom: 1px dashed #abc5ad;
+            box-sizing: border-box;
+            padding: 10px;
+        }
+
+        .card-info {
+            padding: 15px 12px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            flex-grow: 1;
+        }
+
+        .price-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+
+        .item-price {
+            font-size: 16px;
+            font-weight: bold;
+            color: var(--main-red); 
+        }
+
+        .btn-add-cart {
+            background-color: var(--main-red);
+            color: white;
+            border: none;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 6px rgba(182, 37, 37, 0.3);
+            transition: transform 0.1s ease;
+        }
+        .btn-add-cart:active {
+            transform: scale(0.9);
+        }
+
+        .item-name {
+            font-size: 14px;
+            color: #121212; 
+            font-weight: 700;
+            line-height: 1.3;
+            text-transform: uppercase;
+        }
+
+        /* ПЛАВАЮЩАЯ КНОПКА КОРЗИНЫ */
+        .floating-cart-btn {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            background-color: var(--text-dark);
+            color: white;
+            border: none;
+            padding: 15px 20px;
+            border-radius: 30px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            z-index: 999;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* МОДАЛКА КОРЗИНЫ */
+        .cart-modal {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+        }
+        .cart-modal-content {
+            background-color: white;
+            width: 85%;
+            max-width: 450px;
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            color: #121212;
+            display: flex;
+            flex-direction: column;
+            max-height: 80vh;
+        }
+        .cart-modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #f5f5f5;
+            padding-bottom: 15px;
+            margin-bottom: 15px;
+        }
+        .cart-modal-header h3 {
+            margin: 0;
+            font-size: 22px;
+            color: var(--text-dark);
+        }
+        .close-modal-btn {
+            background: none;
+            border: none;
+            font-size: 28px;
+            cursor: pointer;
+            color: #999;
+            padding: 0;
+            line-height: 1;
+        }
+        .cart-items-list {
+            overflow-y: auto;
+            flex-grow: 1;
+            margin-bottom: 20px;
+            padding-right: 5px;
+        }
+        
+        .cart-category-group {
+            margin-top: 15px;
+            margin-bottom: 5px;
+        }
+        .cart-category-title {
+            font-size: 14px;
+            font-weight: 800;
+            background-color: #f1f8e9;
+            color: var(--text-dark);
+            padding: 5px 10px;
+            border-radius: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-left: 3px solid var(--brand-green);
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0 10px 8px;
+            border-bottom: 1px solid #f9f9f9;
+            font-size: 15px;
+            font-weight: 600;
+        }
+        .cart-item-name {
+            flex-grow: 1;
+            padding-right: 10px;
+        }
+        .cart-controls {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .cart-qty-btn {
+            background-color: #e8f5e9;
+            color: var(--text-dark);
+            border: 1px solid #c8e6c9;
+            width: 30px;
+            height: 30px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .cart-item-count {
+            font-size: 15px;
+            font-weight: bold;
+            min-width: 20px;
+            text-align: center;
+        }
+
+        .empty-cart-text {
+            text-align: center;
+            color: #888;
+            padding: 30px 0;
+            font-style: italic;
+        }
+        .clear-cart-btn {
+            background-color: var(--main-red);
+            color: white;
+            border: none;
+            width: 100%;
+            padding: 14px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 15px;
+            cursor: pointer;
+            text-transform: uppercase;
+        }
+
+        /* МОДАЛКА ПОДТВЕРЖДЕНИЯ */
+        .confirm-modal {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            z-index: 1100;
+            display: none;
+            align-items: center;
+            justify-content: center;
+        }
+        .confirm-box {
+            background-color: white;
+            width: 80%;
+            max-width: 320px;
+            border-radius: 18px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+            animation: popIn 0.2s ease-out;
+        }
+        @keyframes popIn {
+            0% { transform: scale(0.9); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        .confirm-box h4 {
+            margin: 0 0 10px 0;
+            font-size: 18px;
+            color: #121212;
+        }
+        .confirm-box p {
+            margin: 0 0 20px 0;
+            font-size: 14px;
+            color: #666;
+        }
+        .confirm-buttons {
+            display: flex;
+            gap: 10px;
+        }
+        .confirm-btn {
+            flex: 1;
+            padding: 12px;
+            font-size: 14px;
+            font-weight: bold;
+            border-radius: 10px;
+            border: none;
+            cursor: pointer;
+            text-transform: uppercase;
+        }
+        .confirm-btn.yes {
+            background-color: var(--main-red);
+            color: white;
+        }
+        .confirm-btn.no {
+            background-color: #eee;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ШАПКА С ФОНОМ ИЗ bg1.jpg ЗА ЛОГОТИПОМ -->
+    <div class="header">
+        <img src="logo.png" alt="NARGIZ SWEETS" class="logo">
+        <div class="restaurant-name">NARGIZ SWEETS</div>
+        <button class="call-waiter-btn">XUSH KELIBSIZ!</button>
+    </div>
+
+    <!-- ВЕРХНЯЯ НАВИГАЦИЯ (ТАБЫ) -->
+    <div class="categories-nav">
+        <a href="#" class="category-btn active" data-tab="pizza">PIZZA</a>
+        <a href="#" class="category-btn" data-tab="fastfood">FASTFOOD</a>
+        <a href="#" class="category-btn" data-tab="sauces">ДОБАВКИ И СОУСЫ</a>
+        <a href="#" class="category-btn" data-tab="hot-drinks">ГОРЯЧИЕ НАПИТКИ</a>
+        <a href="#" class="category-btn" data-tab="cold-drinks">ХОЛОДНЫЕ НАПИТКИ</a>
+        <a href="#" class="category-btn disabled">РОЛЛЫ <span class="badge">СКОРО</span></a>
+    </div>
+
+    <!-- 1. Вкладка PIZZA -->
+    <div id="pizza" class="tab-content active">
+        <div class="section-title">PIZZA</div>
+        <div class="menu-grid">
+            <!-- 1 -->
+            <div class="menu-card">
+                <img src="N1.jpg">
+                <div class="card-info">
+                    <div class="price-row">
+                        <div class="item-price">60 000 so'm</div>
+                        <button class="btn-add-cart" onclick="addToCart('MARGARITA KATTA', 'PIZZA')">+</button>
+                    </div>
+                    <div class="item-name">MARGARITA KATTA</div>
+                </div>
+            </div>
+            <!-- 2 -->
+            <div class="menu-card">
+                <img src="N2.jpg">
+                <div class="card-info">
+                    <div class="price-row">
+                        <div class="item-price">65 000 so'm</div>
+                        <button class="btn-add-cart" onclick="addToCart('PEPERONI KICHKINA', 'PIZZA')">+</button>
+                    </div>
+                    <div class="item-name">PEPERONI KICHKINA</div>
+                </div>
+            </div>
+            <!-- 3 -->
+            <div class="menu-card">
+                <img src="N3.jpg">
+                <div class="card-info">
+                    <div class="price-row">
+                        <div class="item-price">60 000 so'm</div>
+                        <button class="btn-add-cart" onclick="addToCart('MEXIKO O\'RTA', 'PIZZA')">+</button>
+                    </div>
+                    <div class="item-name">MEXIKO O'RTA</div>
+                </div>
+            </div>
+            <!-- 4 -->
+            <div class="menu-card">
+                <img src="N4.jpg">
+                <div class="card-info">
+                    <div class="price-row">
+                        <div class="item-price">80 000 so'm</div>
+                        <button class="btn-add-cart" onclick="addToCart('MEXICO KATTA', 'PIZZA')">+</button>
+                    </div>
+                    <div class="item-name">MEXICO KATTA</div>
+                </div>
+            </div>
+            <!-- 5 -->
+            <div class="menu-card">
+                <img src="N5.jpg">
+                <div class="card-info">
+                    <div class="price-row">
+                        <div class="item-price">55 000 so'm</div>
+                        <button class="btn-add-cart" onclick="addToCart('FOUR CHEESE KICHKINA', 'PIZZA')">+</button>
+                    </div>
+                    <div class="item-name">FOUR CHEESE KICHKINA</div>
+                </div>
+            </div>
+            <!-- 6 -->
+            <div class="menu-card">
+                <img src="N6.jpg">
+                <div class="card-info">
+                    <div class="price-row">
+                        <div class="item-price">75 000 so'm</div>
+                        <button class="btn-add-cart" onclick="addToCart('FOUR CHEESE KATTA', 'PIZZA')">+</button>
+                    </div>
+                    <div class="item-name">FOUR CHEESE KATTA</div>
+                </div>
+            </div>
+            <!-- 7 -->
+            <div class="menu-card">
+                <img src="N7.jpg">
+                <div class="card-info">
+                    <div class="price-row">
+                        <div class="item-price">65 000 so'm</div>
+                        <button class="btn-add-cart" onclick="addToCart('CHICKEN BBQ O\'RTA', 'PIZZA')">+</button>
+                    </div>
+                    <div class="item-name">CHICKEN BBQ O'RTA</div>
+                </div>
+            </div>
+            <!-- 8 -->
+            <div class="menu-card">
+                <img src="N8.jpg">
+                <div class="card-info">
+                    <div class="price-row">
+                        <div class="item-price">85 000 so'm</div>
+                        <button class="btn-add-cart" onclick="addToCart('CHICKEN BBQ KATTA', 'PIZZA')">+</button>
+                    </div>
+                    <div class="item-name">CHICKEN BBQ KATTA</div>
+                </div>
+            </div>
+            <!-- 9 -->
+            <div class="menu-card">
+                <img src="N9.jpg">
+                <div class="card-info">
+                    <div class="price-row">
+                        <div class="item-price">58 000 so'm</div>
+                        <button class="btn-add-cart" onclick="addToCart('VEGETARIAN O\'RTA', 'PIZZA')">+</button>
+                    </div>
+                    <div class="item-name">VEGETARIAN O'RTA</div>
+                </div>
+            </div>
+            <!-- 10 -->
+            <div class="menu-card">
+                <img src="N10.jpg">
+                <div class="card-info">
+                    <div class="price-row">
+                        <div class="item-price">78 000 so'm</div>
+                        <button class="btn-add-cart" onclick="addToCart('VEGETARIAN KATTA', 'PIZZA')">+</button>
+                    </div>
+                    <div class="item-name">VEGETARIAN KATTA</div>
+                </div>
+            </div>
+            <!-- 11 -->
+            <div class="menu-card">
+                <img src="N11.jpg">
+                <div class="card-info">
+                    <div class="price-row">
+                        <div class="item-price">70 000 so'm</div>
+                        <button class="btn-add-cart" onclick="addToCart('COMBINED O\'RTA', 'PIZZA')">+</button>
+                    </div>
+                    <div class="item-name">COMBINED O'RTA</div>
+                </div>
+            </div>
+            <!-- 12 -->
+            <div class="menu-card">
+                <img src="N12.jpg">
+                <div class="card-info">
+                    <div class="price-row">
+                        <div class="item-price">90 000 so'm</div>
+                        <button class="btn-add-cart" onclick="addToCart('COMBINED KATTA', 'PIZZA')">+</button>
+                    </div>
+                    <div class="item-name">COMBINED KATTA</div>
+                </div>
+            </div>
+            <!-- 13 -->
+            <div class="menu-card">
+                <img src="N13.jpg">
+                <div class="card-info">
+                    <div class="price-row">
+                        <div class="item-price">95 000 so'm</div>
+                        <button class="btn-add-cart" onclick="addToCart('PIZZA ШАБЛОН 13', 'PIZZA')">+</button>
+                    </div>
+                    <div class="item-name">PIZZA ШАБЛОН 13</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 2. Вкладка FASTFOOD -->
+    <div id="fastfood" class="tab-content">
+        <div class="section-title">FASTFOOD</div>
+        <div class="menu-grid">
+            <div class="menu-card">
+                <div class="img-placeholder">Место для фото<br>(Замените этот блок на &lt;img src="ваш_файл.jpg"&gt;)</div>
+                <div class="card-info">
+                    <div class="price-row">
+                        <div class="item-price">35 000 so'm</div>
+                        <button class="btn-add-cart" onclick="addToCart('FASTFOOD ШАБЛОН 1', 'FASTFOOD')">+</button>
+                    </div>
+                    <div class="item-name">FASTFOOD ШАБЛОН 1</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 3. Вкладка ДОБАВКИ И СОУСЫ -->
+    <div id="sauces" class="tab-content">
+        <div class="section-title">ДОБАВКИ И СОУСЫ</div>
+        <div class="menu-grid">
+            <div class="menu-card">
+                <div class="img-placeholder">Место для фото<br>(Замените этот блок на &lt;img src="ваш_файл.jpg"&gt;)</div>
+                <div class="card-info">
+                    <div class="price-row">
+                        <div class="item-price">5 000 so'm</div>
+                        <button class="btn-add-cart" onclick="addToCart('СОУС ШАБЛОН 1', 'ДОБАВКИ И СОУСЫ')">+</button>
+                    </div>
+                    <div class="item-name">СОУС ШАБЛОН 1</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 4. Вкладка ГОРЯЧИЕ НАПИТКИ -->
+    <div id="hot-drinks" class="tab-content">
+        <div class="section-title">ГОРЯЧИЕ НАПИТКИ</div>
+        <div class="menu-grid">
+            <div class="menu-card">
+                <div class="img-placeholder">Место для фото<br>(Замените этот блок на &lt;img src="ваш_файл.jpg"&gt;)</div>
+                <div class="card-info">
+                    <div class="price-row">
+                        <div class="item-price">15 000 so'm</div>
+                        <button class="btn-add-cart" onclick="addToCart('ГОРЯЧИЙ НАПИТОК 1', 'ГОРЯЧИЕ НАПИТКИ')">+</button>
+                    </div>
+                    <div class="item-name">ГОРЯЧИЙ НАПИТКОК 1</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 5. Вкладка ХОЛОДНЫЕ НАПИТКИ -->
+    <div id="cold-drinks" class="tab-content">
+        <div class="section-title">ХОЛОДНЫЕ НАПИТКИ</div>
+        <div class="menu-grid">
+            <div class="menu-card">
+                <div class="img-placeholder">Место для фото<br>(Замените этот блок на &lt;img src="ваш_файл.jpg"&gt;)</div>
+                <div class="card-info">
+                    <div class="price-row">
+                        <div class="item-price">12 000 so'm</div>
+                        <button class="btn-add-cart" onclick="addToCart('ХОЛОДНЫЙ НАПИТОК 1', 'ХОЛОДНЫЕ НАПИТКИ')">+</button>
+                    </div>
+                    <div class="item-name">ХОЛОДНЫЙ НАПИТОК 1</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ПЛАВАЮЩАЯ КНОПКА КОРЗИНЫ -->
+    <button class="floating-cart-btn" onclick="openCart()">
+        <span>🛒</span> <span id="cart-counter">(0)</span>
+    </button>
+
+    <!-- МОДАЛЬНОЕ ОКНО КОРЗИНЫ -->
+    <div id="cartModal" class="cart-modal">
+        <div class="cart-modal-content">
+            <div class="cart-modal-header">
+                <h3>Tanlanganlar / Выбрано</h3>
+                <button class="close-modal-btn" onclick="closeCart()">&times;</button>
+            </div>
+            <div id="cartItemsList" class="cart-items-list"></div>
+            <button class="clear-cart-btn" onclick="showConfirmModal()">Ochirish / Очистить заказ</button>
+        </div>
+    </div>
+
+    <!-- ОКНО ПОДТВЕРЖДЕНИЯ ОЧИСТКИ -->
+    <div id="confirmModal" class="confirm-modal">
+        <div class="confirm-box">
+            <h4>Ochirish / Очистить?</h4>
+            <p>Savatni butunlay bo'shatmoqchimisiz?<br>Вы уверены, что хотите очистить весь заказ?</p>
+            <div class="confirm-buttons">
+                <button class="confirm-btn yes" onclick="confirmClearCart(true)">Ha / Да</button>
+                <button class="confirm-btn no" onclick="confirmClearCart(false)">Yo'q / Нет</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- СКРИПТЫ -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('sw.js')
+                    .then(reg => console.log('PWA SW запущен успешно!'))
+                    .catch(err => console.log('Ошибка SW:', err));
+            });
+        }
+
+        // Переключение табов меню
+        const buttons = document.querySelectorAll('.category-btn:not(.disabled)');
+        const contents = document.querySelectorAll('.tab-content');
+
+        buttons.forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault(); 
+                buttons.forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                const targetTab = this.getAttribute('data-tab');
+                contents.forEach(content => content.classList.remove('active'));
+                document.getElementById(targetTab).classList.add('active');
+            });
+        });
+
+        // Логика работы корзины
+        let cart = JSON.parse(localStorage.getItem('menu_cart')) || [];
+
+        function saveCart() {
+            localStorage.setItem('menu_cart', JSON.stringify(cart));
+            updateCartCounter();
+        }
+
+        function updateCartCounter() {
+            const totalItems = cart.reduce((sum, item) => sum + item.count, 0);
+            document.getElementById('cart-counter').innerText = `(${totalItems})`;
+        }
+
+        function addToCart(itemName, categoryName) {
+            const existingItem = cart.find(item => item.name === itemName);
+            if (existingItem) {
+                existingItem.count += 1;
+            } else {
+                cart.push({ name: itemName, category: categoryName, count: 1 });
+            }
+            saveCart();
+        }
+
+        function changeQty(itemName, change) {
+            const item = cart.find(item => item.name === itemName);
+            if (item) {
+                item.count += change;
+                if (item.count <= 0) {
+                    cart = cart.filter(i => i.name !== itemName);
+                }
+                saveCart();
+                renderCartList(); 
+            }
+        }
+
+        function renderCartList() {
+            const listContainer = document.getElementById('cartItemsList');
+            listContainer.innerHTML = ''; 
+
+            if (cart.length === 0) {
+                listContainer.innerHTML = '<div class="empty-cart-text">Savat bo\'sh / Корзина пуста</div>';
+                return;
+            }
+
+            const groups = {};
+            cart.forEach(item => {
+                if (!groups[item.category]) groups[item.category] = [];
+                groups[item.category].push(item);
+            });
+
+            for (const category in groups) {
+                const catGroup = document.createElement('div');
+                catGroup.className = 'cart-category-group';
+                catGroup.innerHTML = `<div class="cart-category-title">${category}</div>`;
+                listContainer.appendChild(catGroup);
+
+                groups[category].forEach(item => {
+                    const itemRow = document.createElement('div');
+                    itemRow.className = 'cart-item';
+                    itemRow.innerHTML = `
+                        <div class="cart-item-name">${item.name}</div>
+                        <div class="cart-controls">
+                            <button class="cart-qty-btn" onclick="changeQty('${item.name}', -1)">-</button>
+                            <div class="cart-item-count">${item.count}</div>
+                            <button class="cart-qty-btn" onclick="changeQty('${item.name}', 1)">+</button>
+                        </div>
+                    `;
+                    listContainer.appendChild(itemRow);
+                });
+            }
+        }
+
+        function openCart() { renderCartList(); document.getElementById('cartModal').style.display = 'flex'; }
+        function closeCart() { document.getElementById('cartModal').style.display = 'none'; }
+        function showConfirmModal() { document.getElementById('confirmModal').style.display = 'flex'; }
+
+        function confirmClearCart(isConfirmed) {
+            document.getElementById('confirmModal').style.display = 'none';
+            if (isConfirmed) { cart = []; saveCart(); closeCart(); }
+        }
+
+        window.onclick = function(event) {
+            const cartModal = document.getElementById('cartModal');
+            const confirmModal = document.getElementById('confirmModal');
+            if (event.target === cartModal) closeCart();
+            if (event.target === confirmModal) document.getElementById('confirmModal').style.display = 'none';
+        }
+
+        updateCartCounter();
+    </script>
+</body>
+</html>
