@@ -483,21 +483,25 @@
     </div>
 
     <!-- 1. Вкладка PIZZA -->
-    <div id="pizza" class="tab-content active">
-        <div class="section-title">PIZZA</div>
-        <div class="menu-grid">
-            <!-- 1 -->
-            <div class="menu-card">
-                <img src="N1.jpg">
-                <div class="card-info">
-                    <div class="price-row">
-                        <div class="item-price">78 000 so'm 
-                            60 000 so'm</div>
-                        <button class="btn-add-cart" onclick="addToCart('Жульен (30-35см)', 'PIZZA')">+</button>
-                    </div>
-                    <div class="item-name">MARGARITA KATTA</div>
-                </div>
-            </div>
+<div class="menu-card">
+    <img src="N1.jpg">
+    <div class="card-info">
+        <!-- Название блюда теперь сверху, так логичнее -->
+        <div class="item-name" style="margin-bottom: 12px;">Жульен</div>
+        
+        <!-- Вариант 30 см -->
+        <div class="price-row" style="margin-bottom: 10px; border-bottom: 1px dashed rgba(0,0,0,0.1); padding-bottom: 8px;">
+            <div class="item-price" style="font-size: 14px;">30 см — 78 000 so'm</div>
+            <button class="btn-add-cart" onclick="addToCart('Жульен 30 см', 'PIZZA')">+</button>
+        </div>
+        
+        <!-- Вариант 35 см -->
+        <div class="price-row">
+            <div class="item-price" style="font-size: 14px;">35 см — 88 000 so'm</div>
+            <button class="btn-add-cart" onclick="addToCart('Жульен 35 см', 'PIZZA')">+</button>
+        </div>
+    </div>
+</div>
             <!-- 2 -->
             <div class="menu-card">
                 <img src="N2.jpg">
