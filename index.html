@@ -177,37 +177,11 @@
             box-shadow: 0 4px 12px rgba(0,0,0,0.05);
         }
 
-        /* Контейнер для кликабельной картинки с лупой */
-        .menu-card-img-container {
-            position: relative;
+        .menu-card img {
             width: 100%;
             height: 160px;
-            cursor: pointer;
-            overflow: hidden;
-            -webkit-tap-highlight-color: transparent;
-        }
-
-        .menu-card-img-container img {
-            width: 100%;
-            height: 100%;
             object-fit: cover;
             background-color: #eaeaea;
-            display: block;
-        }
-
-        /* Иконка лупы поверх картинки товара (ИЗМЕНЕНО НА ЛЕВЫЙ ВЕРХНИЙ УГОЛ) */
-        .zoom-indicator {
-            position: absolute;
-            top: 8px;
-            left: 8px;
-            background: rgba(0, 0, 0, 0.5);
-            color: white;
-            font-size: 12px;
-            padding: 4px 6px;
-            border-radius: 6px;
-            pointer-events: none;
-            font-family: sans-serif;
-            line-height: 1;
         }
 
         .img-placeholder {
@@ -226,7 +200,6 @@
             padding: 10px;
         }
 
-        /* ДВУХЗОННЫЙ БЛОК ЦЕН (АККУРАТНЫЕ ЛИНИИ) */
         .double-price-block {
             display: flex;
             background-color: var(--card-info-bg);
@@ -242,7 +215,7 @@
         }
 
         .price-zone.left {
-            border-right: 1px solid rgba(0, 0, 0, 0.08); 
+            border-right: 1px solid rgba(0, 0, 0, 0.08);
         }
 
         .zone-price-text {
@@ -281,16 +254,15 @@
             transform: scale(0.9);
         }
 
-        /* БЛОК НАЗВАНИЯ В САМОМ НИЗУ (КРУПНЕЕ И ПО ЦЕНТРУ) */
         .card-title-block {
             padding: 12px;
             background-color: var(--card-info-bg);
-            text-align: center; 
-            border-top: 1px solid rgba(0, 0, 0, 0.08); 
+            text-align: center;
+            border-top: 1px solid rgba(0, 0, 0, 0.08);
         }
 
         .item-name {
-            font-size: 16px; 
+            font-size: 16px;
             color: #121212; 
             font-weight: 700;
             line-height: 1.3;
@@ -497,55 +469,6 @@
             background-color: #eee;
             color: #333;
         }
-
-        /* МОДАЛЬНОЕ ОКНО ДЛЯ ДЕТАЛЬНОГО ПРОСМОТРА КАРТИНКИ */
-        .image-viewer-modal {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background-color: rgba(0, 0, 0, 0.85);
-            z-index: 2000;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            backdrop-filter: blur(4px);
-            -webkit-backdrop-filter: blur(4px);
-        }
-
-        .image-viewer-wrapper {
-            position: relative;
-            width: 90%;
-            max-width: 500px;
-            animation: popIn 0.25s ease-out;
-        }
-
-        .image-viewer-img {
-            width: 100%;
-            height: auto;
-            border-radius: 16px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            display: block;
-            object-fit: contain;
-        }
-
-        .image-viewer-close {
-            position: absolute;
-            top: -45px;
-            right: 0;
-            background: rgba(255, 255, 255, 0.25);
-            color: white;
-            border: none;
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            font-size: 24px;
-            font-weight: bold;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            line-height: 1;
-        }
     </style>
 </head>
 <body>
@@ -566,253 +489,10 @@
 
     <div id="pizza" class="tab-content active">
         <div class="section-title">PIZZA</div>
-        <div class="menu-grid">
+        <div class="menu-grid" id="pizza-container">
             
             <div class="menu-card">
-                <div class="menu-card-img-container" onmousedown="handleImgTouchStart(event)" onmouseup="handleImgTouchEnd(event, 'N1-1.jpg')" ontouchstart="handleImgTouchStart(event)" ontouchend="handleImgTouchEnd(event, 'N1-1.jpg')">
-                    <img src="N1.jpg">
-                    <span class="zoom-indicator">🔍</span>
-                </div>
-                <div class="double-price-block">
-                    <div class="price-zone left">
-                        <div class="zone-price-text"><span class="zone-size-label">30см</span>78 000</div>
-                        <button class="btn-add-cart" onclick="addToCart('Жульен 30см', 'PIZZA')">+</button>
-                    </div>
-                    <div class="price-zone right">
-                        <div class="zone-price-text"><span class="zone-size-label">35см</span>88 000</div>
-                        <button class="btn-add-cart" onclick="addToCart('Жульен 35см', 'PIZZA')">+</button>
-                    </div>
-                </div>
-                <div class="card-title-block">
-                    <div class="item-name">Жульен</div>
-                </div>
-            </div>
-
-            <div class="menu-card">
-                <div class="menu-card-img-container" onmousedown="handleImgTouchStart(event)" onmouseup="handleImgTouchEnd(event, 'N2-2.jpg')" ontouchstart="handleImgTouchStart(event)" ontouchend="handleImgTouchEnd(event, 'N2-2.jpg')">
-                    <img src="N2.jpg">
-                    <span class="zoom-indicator">🔍</span>
-                </div>
-                <div class="double-price-block">
-                    <div class="price-zone left">
-                        <div class="zone-price-text"><span class="zone-size-label">30см</span>100 000</div>
-                        <button class="btn-add-cart" onclick="addToCart('Пицца с казы 30см', 'PIZZA')">+</button>
-                    </div>
-                    <div class="price-zone right">
-                        <div class="zone-price-text"><span class="zone-size-label">35см</span>110 000</div>
-                        <button class="btn-add-cart" onclick="addToCart('Пицца с казы 35см', 'PIZZA')">+</button>
-                    </div>
-                </div>
-                <div class="card-title-block">
-                    <div class="item-name">Пицца с казы</div>
-                </div>
-            </div>
-
-            <div class="menu-card">
-                <div class="menu-card-img-container" onmousedown="handleImgTouchStart(event)" onmouseup="handleImgTouchEnd(event, 'N3-3.jpg')" ontouchstart="handleImgTouchStart(event)" ontouchend="handleImgTouchEnd(event, 'N3-3.jpg')">
-                    <img src="N3.jpg">
-                    <span class="zoom-indicator">🔍</span>
-                </div>
-                <div class="double-price-block">
-                    <div class="price-zone left">
-                        <div class="zone-price-text"><span class="zone-size-label">30см</span>55 000</div>
-                        <button class="btn-add-cart" onclick="addToCart('МАРГАРИТА 30см', 'PIZZA')">+</button>
-                    </div>
-                    <div class="price-zone right">
-                        <div class="zone-price-text"><span class="zone-size-label">35см</span>65 000</div>
-                        <button class="btn-add-cart" onclick="addToCart('МАРГАРИТА 35см', 'PIZZA')">+</button>
-                    </div>
-                </div>
-                <div class="card-title-block">
-                    <div class="item-name">МАРГАРИТА</div>
-                </div>
-            </div>
-
-            <div class="menu-card">
-                <div class="menu-card-img-container" onmousedown="handleImgTouchStart(event)" onmouseup="handleImgTouchEnd(event, 'N4-4.jpg')" ontouchstart="handleImgTouchStart(event)" ontouchend="handleImgTouchEnd(event, 'N4-4.jpg')">
-                    <img src="N4.jpg">
-                    <span class="zoom-indicator">🔍</span>
-                </div>
-                <div class="double-price-block">
-                    <div class="price-zone left">
-                        <div class="zone-price-text"><span class="zone-size-label">30см</span>68 000</div>
-                        <button class="btn-add-cart" onclick="addToCart('ПЕППЕРОНИ 30см', 'PIZZA')">+</button>
-                    </div>
-                    <div class="price-zone right">
-                        <div class="zone-price-text"><span class="zone-size-label">35см</span>78 000</div>
-                        <button class="btn-add-cart" onclick="addToCart('ПЕППЕРОНИ 35см', 'PIZZA')">+</button>
-                    </div>
-                </div>
-                <div class="card-title-block">
-                    <div class="item-name">ПЕППЕРОНИ</div>
-                </div>
-            </div>
-
-            <div class="menu-card">
-                <div class="menu-card-img-container" onmousedown="handleImgTouchStart(event)" onmouseup="handleImgTouchEnd(event, 'N5-5.jpg')" ontouchstart="handleImgTouchStart(event)" ontouchend="handleImgTouchEnd(event, 'N5-5.jpg')">
-                    <img src="N5.jpg">
-                    <span class="zoom-indicator">🔍</span>
-                </div>
-                <div class="double-price-block">
-                    <div class="price-zone left">
-                        <div class="zone-price-text"><span class="zone-size-label">30см</span>65 000</div>
-                        <button class="btn-add-cart" onclick="addToCart('КУРИЦА С ГРИБАМИ 30см', 'PIZZA')">+</button>
-                    </div>
-                    <div class="price-zone right">
-                        <div class="zone-price-text"><span class="zone-size-label">35см</span>75 000</div>
-                        <button class="btn-add-cart" onclick="addToCart('КУРИЦА С ГРИБАМИ 35см', 'PIZZA')">+</button>
-                    </div>
-                </div>
-                <div class="card-title-block">
-                    <div class="item-name">КУРИЦА С ГРИБАМИ</div>
-                </div>
-            </div>
-
-            <div class="menu-card">
-                <div class="menu-card-img-container" onmousedown="handleImgTouchStart(event)" onmouseup="handleImgTouchEnd(event, 'N6-6.jpg')" ontouchstart="handleImgTouchStart(event)" ontouchend="handleImgTouchEnd(event, 'N6-6.jpg')">
-                    <img src="N6.jpg">
-                    <span class="zoom-indicator">🔍</span>
-                </div>
-                <div class="double-price-block">
-                    <div class="price-zone left">
-                        <div class="zone-price-text"><span class="zone-size-label">30см</span>75 000</div>
-                        <button class="btn-add-cart" onclick="addToCart('ОХОТНИЧЬЯ 30см', 'PIZZA')">+</button>
-                    </div>
-                    <div class="price-zone right">
-                        <div class="zone-price-text"><span class="zone-size-label">35см</span>85 000</div>
-                        <button class="btn-add-cart" onclick="addToCart('ОХОТНИЧЬЯ 35см', 'PIZZA')">+</button>
-                    </div>
-                </div>
-                <div class="card-title-block">
-                    <div class="item-name">ОХОТНИЧЬЯ</div>
-                </div>
-            </div>
-
-             <div class="menu-card">
-                <div class="menu-card-img-container" onmousedown="handleImgTouchStart(event)" onmouseup="handleImgTouchEnd(event, 'N7-7.jpg')" ontouchstart="handleImgTouchStart(event)" ontouchend="handleImgTouchEnd(event, 'N7-7.jpg')">
-                    <img src="N7.jpg">
-                    <span class="zoom-indicator">🔍</span>
-                </div>
-                <div class="double-price-block">
-                    <div class="price-zone left">
-                        <div class="zone-price-text"><span class="zone-size-label">30см</span>80 000</div>
-                        <button class="btn-add-cart" onclick="addToCart('4 сезона 30см', 'PIZZA')">+</button>
-                    </div>
-                    <div class="price-zone right">
-                        <div class="zone-price-text"><span class="zone-size-label">35см</span>90 000</div>
-                        <button class="btn-add-cart" onclick="addToCart('4 сезона 35см', 'PIZZA')">+</button>
-                    </div>
-                </div>
-                <div class="card-title-block">
-                    <div class="item-name">4 сезона</div>
-                </div>
-            </div>
-
-            <div class="menu-card">
-                <div class="menu-card-img-container" onmousedown="handleImgTouchStart(event)" onmouseup="handleImgTouchEnd(event, 'N8-8.jpg')" ontouchstart="handleImgTouchStart(event)" ontouchend="handleImgTouchEnd(event, 'N8-8.jpg')">
-                    <img src="N8.jpg">
-                    <span class="zoom-indicator">🔍</span>
-                </div>
-                <div class="double-price-block">
-                    <div class="price-zone left">
-                        <div class="zone-price-text"><span class="zone-size-label">30см</span>85 000</div>
-                        <button class="btn-add-cart" onclick="addToCart('ГУШТЛИ (мясная) 30см', 'PIZZA')">+</button>
-                    </div>
-                    <div class="price-zone right">
-                        <div class="zone-price-text"><span class="zone-size-label">35см</span>95 000</div>
-                        <button class="btn-add-cart" onclick="addToCart('ГУШТЛИ (мясная) 35см', 'PIZZA')">+</button>
-                    </div>
-                </div>
-                <div class="card-title-block">
-                    <div class="item-name">ГУШТЛИ (мясная)</div>
-                </div>
-            </div>
-
-            <div class="menu-card">
-                <div class="menu-card-img-container" onmousedown="handleImgTouchStart(event)" onmouseup="handleImgTouchEnd(event, 'N9-9.jpg')" ontouchstart="handleImgTouchStart(event)" ontouchend="handleImgTouchEnd(event, 'N9-9.jpg')">
-                    <img src="N9.jpg">
-                    <span class="zoom-indicator">🔍</span>
-                </div>
-                <div class="double-price-block">
-                    <div class="price-zone left">
-                        <div class="zone-price-text"><span class="zone-size-label">30см</span>70 000</div>
-                        <button class="btn-add-cart" onclick="addToCart('50/50 30см', 'PIZZA')">+</button>
-                    </div>
-                    <div class="price-zone right">
-                        <div class="zone-price-text"><span class="zone-size-label">35см</span>80 000</div>
-                        <button class="btn-add-cart" onclick="addToCart('50/50 35см', 'PIZZA')">+</button>
-                    </div>
-                </div>
-                <div class="card-title-block">
-                    <div class="item-name">50/50</div>
-                </div>
-            </div>
-
-            <div class="menu-card">
-                <div class="menu-card-img-container" onmousedown="handleImgTouchStart(event)" onmouseup="handleImgTouchEnd(event, 'N10-10.jpg')" ontouchstart="handleImgTouchStart(event)" ontouchend="handleImgTouchEnd(event, 'N10-10.jpg')">
-                    <img src="N10.jpg">
-                    <span class="zoom-indicator">🔍</span>
-                </div>
-                <div class="double-price-block">
-                    <div class="price-zone left">
-                        <div class="zone-price-text"><span class="zone-size-label">30см</span>80 000</div>
-                        <button class="btn-add-cart" onclick="addToCart('Мексиканская 30см', 'PIZZA')">+</button>
-                    </div>
-                    <div class="price-zone right">
-                        <div class="zone-price-text"><span class="zone-size-label">35см</span>90 000</div>
-                        <button class="btn-add-cart" onclick="addToCart('Мексиканская 35см', 'PIZZA')">+</button>
-                    </div>
-                </div>
-                <div class="card-title-block">
-                    <div class="item-name">Мексиканская</div>
-                </div>
-            </div>
-
-            <div class="menu-card">
-                <div class="menu-card-img-container" onmousedown="handleImgTouchStart(event)" onmouseup="handleImgTouchEnd(event, 'N11-11.jpg')" ontouchstart="handleImgTouchStart(event)" ontouchend="handleImgTouchEnd(event, 'N11-11.jpg')">
-                    <img src="N11.jpg">
-                    <span class="zoom-indicator">🔍</span>
-                </div>
-                <div class="double-price-block">
-                    <div class="price-zone left">
-                        <div class="zone-price-text"><span class="zone-size-label">30см</span>82 000</div>
-                        <button class="btn-add-cart" onclick="addToCart('Барбекю 30см', 'PIZZA')">+</button>
-                    </div>
-                    <div class="price-zone right">
-                        <div class="zone-price-text"><span class="zone-size-label">35см</span>92 000</div>
-                        <button class="btn-add-cart" onclick="addToCart('Барбекю 35см', 'PIZZA')">+</button>
-                    </div>
-                </div>
-                <div class="card-title-block">
-                    <div class="item-name">Барбекю</div>
-                </div>
-            </div>
-
-            <div class="menu-card">
-                <div class="menu-card-img-container" onmousedown="handleImgTouchStart(event)" onmouseup="handleImgTouchEnd(event, 'N12-12.jpg')" ontouchstart="handleImgTouchStart(event)" ontouchend="handleImgTouchEnd(event, 'N12-12.jpg')">
-                    <img src="N12.jpg">
-                    <span class="zoom-indicator">🔍</span>
-                </div>
-                <div class="double-price-block">
-                    <div class="price-zone left">
-                        <div class="zone-price-text"><span class="zone-size-label">30см</span>75 000</div>
-                        <button class="btn-add-cart" onclick="addToCart('ЦЕЗАРЬ 30см', 'PIZZA')">+</button>
-                    </div>
-                    <div class="price-zone right">
-                        <div class="zone-price-text"><span class="zone-size-label">35см</span>85 000</div>
-                        <button class="btn-add-cart" onclick="addToCart('ЦЕЗАРЬ 35см', 'PIZZA')">+</button>
-                    </div>
-                </div>
-                <div class="card-title-block">
-                    <div class="item-name">ЦЕЗАРЬ</div>
-                </div>
-            </div>
-            
-            <div class="menu-card">
-                <div class="menu-card-img-container" onmousedown="handleImgTouchStart(event)" onmouseup="handleImgTouchEnd(event, 'N13-13.jpg')" ontouchstart="handleImgTouchStart(event)" ontouchend="handleImgTouchEnd(event, 'N13-13.jpg')">
-                    <img src="N13.jpg">
-                    <span class="zoom-indicator">🔍</span>
-                </div>
+                <img src="N13.jpg">
                 <div class="double-price-block">
                     <div class="price-zone" style="justify-content: space-between; padding: 12px;">
                         <div class="zone-price-text" style="font-size: 15px;">75 000 so'm</div>
@@ -829,7 +509,242 @@
 
     <div id="sauces" class="tab-content">
         <div class="section-title">ДОБАВКИ И СОУСЫ</div>
+        <div class="menu-grid">
+            <div class="menu-card">
+                <img src="D1.jpg" alt="Картофель Фри">
+                <div class="double-price-block">
+                    <div class="price-zone">
+                        <div class="zone-price-text">22 000 so'm</div>
+                        <button class="btn-add-cart" onclick="addToCart('КАРТОФЕЛЬ ФРИ', 'ДОБАВКИ И СОУСЫ')">+</button>
+                    </div>
+                </div>
+                <div class="card-title-block">
+                    <div class="item-name">КАРТОФЕЛЬ ФРИ</div>
+                </div>
+            </div>
+        </div>
     </div>
 
+    <div id="hot-drinks" class="tab-content">
+        <div class="section-title">ГОРЯЧИЕ НАПИТКИ</div>
+        <div class="menu-grid">
+            <div class="menu-card">
+                <div class="img-placeholder">Место для фото</div>
+                <div class="double-price-block">
+                    <div class="price-zone">
+                        <div class="zone-price-text">15 000 so'm</div>
+                        <button class="btn-add-cart" onclick="addToCart('ГОРЯЧИЙ НАПИТОК 1', 'ГОРЯЧИЕ НАПИТКИ')">+</button>
+                    </div>
+                </div>
+                <div class="card-title-block">
+                    <div class="item-name">ГОРЯЧИЙ НАПИТОК 1</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="cold-drinks" class="tab-content">
+        <div class="section-title">ХОЛОДНЫЕ НАПИТКИ</div>
+        <div class="menu-grid">
+            <div class="menu-card">
+                <div class="img-placeholder">Место для фото</div>
+                <div class="double-price-block">
+                    <div class="price-zone">
+                        <div class="zone-price-text">12 000 so'm</div>
+                        <button class="btn-add-cart" onclick="addToCart('ХОЛОДНЫЙ НАПИТОК 1', 'ХОЛОДНЫЕ НАПИТКИ')">+</button>
+                    </div>
+                </div>
+                <div class="card-title-block">
+                    <div class="item-name">ХОЛОДНЫЙ НАПИТОК 1</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <button class="floating-cart-btn" onclick="openCart()">
+        <span>🛒</span> <span id="cart-counter">(0)</span>
+    </button>
+
+    <div id="cartModal" class="cart-modal">
+        <div class="cart-modal-content">
+            <div class="cart-modal-header">
+                <h3>Tanlanganlar / Выбрано</h3>
+                <button class="close-modal-btn" onclick="closeCart()">&times;</button>
+            </div>
+            <div id="cartItemsList" class="cart-items-list"></div>
+            <button class="clear-cart-btn" onclick="showConfirmModal()">Ochirish / Очистить заказ</button>
+        </div>
+    </div>
+
+    <div id="confirmModal" class="confirm-modal">
+        <div class="confirm-box">
+            <h4>Ochirish / Очистить?</h4>
+            <p>Savatni butunlay bo'shatmoqchimisiz?<br>Вы уверены, что хотите очистить весь заказ?</p>
+            <div class="confirm-buttons">
+                <button class="confirm-btn yes" onclick="confirmClearCart(true)">Ha / Да</button>
+                <button class="confirm-btn no" onclick="confirmClearCart(false)">Yo'q / Нет</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Данные только для пицц строго от 1 до 12
+        const pizzaData = [
+            { id: 1, name: "Жульен", price30: "78 000", price35: "88 000" },
+            { id: 2, name: "Пицца с казы", price30: "100 000", price35: "110 000" },
+            { id: 3, name: "МАРГАРИТА", price30: "55 000", price35: "65 000" },
+            { id: 4, name: "ПЕППЕРОНИ", price30: "68 000", price35: "78 000" },
+            { id: 5, name: "КУРИЦА С ГРИБАМИ", price30: "65 000", price35: "75 000" },
+            { id: 6, name: "ОХОТНИЧЬЯ", price30: "75 000", price35: "85 000" },
+            { id: 7, name: "4 сезона", price30: "80 000", price35: "90 000" },
+            { id: 8, name: "ГУШТЛИ (мясная)", price30: "85 000", price35: "95 000" },
+            { id: 9, name: "50/50", price30: "70 000", price35: "80 000" },
+            { id: 10, name: "Мексиканская", price30: "80 000", price35: "90 000" },
+            { id: 11, name: "Барбекю", price30: "82 000", price35: "92 000" },
+            { id: 12, name: "ЦЕЗАРЬ", price30: "75 000", price35: "85 000" }
+        ];
+
+        // Рендеринг пицц от 1 до 12 в начало контейнера перед Хачапури
+        const pizzaContainer = document.getElementById('pizza-container');
+        pizzaData.forEach(pizza => {
+            const cardHTML = `
+                <div class="menu-card">
+                    <img src="N${pizza.id}.jpg">
+                    <div class="double-price-block">
+                        <div class="price-zone left">
+                            <div class="zone-price-text"><span class="zone-size-label">30см</span>${pizza.price30}</div>
+                            <button class="btn-add-cart" onclick="addToCart('${pizza.name} 30см', 'PIZZA')">+</button>
+                        </div>
+                        <div class="price-zone right">
+                            <div class="zone-price-text"><span class="zone-size-label">35см</span>${pizza.price35}</div>
+                            <button class="btn-add-cart" onclick="addToCart('${pizza.name} 35см', 'PIZZA')">+</button>
+                        </div>
+                    </div>
+                    <div class="card-title-block">
+                        <div class="item-name">${pizza.name}</div>
+                    </div>
+                </div>
+            `;
+            pizzaContainer.insertAdjacentHTML('afterbegin', cardHTML);
+        });
+
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('sw.js')
+                    .then(reg => console.log('PWA SW запущен успешно!'))
+                    .catch(err => console.log('Ошибка SW:', err));
+            });
+        }
+
+        const buttons = document.querySelectorAll('.category-btn:not(.disabled)');
+        const contents = document.querySelectorAll('.tab-content');
+
+        buttons.forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault(); 
+                buttons.forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                const targetTab = this.getAttribute('data-tab');
+                contents.forEach(content => content.classList.remove('active'));
+                document.getElementById(targetTab).classList.add('active');
+            });
+        });
+
+        let cart = JSON.parse(localStorage.getItem('menu_cart')) || [];
+
+        function saveCart() {
+            localStorage.setItem('menu_cart', JSON.stringify(cart));
+            updateCartCounter();
+            if (document.getElementById('cartModal').style.display === 'flex') {
+                renderCart();
+            }
+        }
+
+        function updateCartCounter() {
+            const totalItems = cart.reduce((sum, item) => sum + item.count, 0);
+            document.getElementById('cart-counter').innerText = `(${totalItems})`;
+        }
+
+        function addToCart(itemName, categoryName) {
+            const existingItem = cart.find(item => item.name === itemName);
+            if (existingItem) {
+                existingItem.count += 1;
+            } else {
+                cart.push({ name: itemName, category: categoryName, count: 1 });
+            }
+            saveCart();
+        }
+
+        function changeQty(itemName, change) {
+            const item = cart.find(item => item.name === itemName);
+            if (item) {
+                item.count += change;
+                if (item.count <= 0) {
+                    cart = cart.filter(i => i.name !== itemName);
+                }
+                saveCart();
+            }
+        }
+
+        function openCart() {
+            document.getElementById('cartModal').style.display = 'flex';
+            renderCart();
+        }
+
+        function closeCart() {
+            document.getElementById('cartModal').style.display = 'none';
+        }
+
+        function showConfirmModal() {
+            if (cart.length === 0) return;
+            document.getElementById('confirmModal').style.display = 'flex';
+        }
+
+        function confirmClearCart(shouldClear) {
+            if (shouldClear) {
+                cart = [];
+                saveCart();
+                closeCart();
+            }
+            document.getElementById('confirmModal').style.display = 'none';
+        }
+
+        function renderCart() {
+            const listContainer = document.getElementById('cartItemsList');
+            listContainer.innerHTML = '';
+
+            if (cart.length === 0) {
+                listContainer.innerHTML = '<div class="empty-cart-text">Savat bo\'sh / Корзина пуста</div>';
+                return;
+            }
+
+            const categories = [...new Set(cart.map(item => item.category))];
+
+            categories.forEach(cat => {
+                const group = document.createElement('div');
+                group.className = 'cart-category-group';
+                group.innerHTML = `<div class="cart-category-title">${cat}</div>`;
+
+                const items = cart.filter(item => item.category === cat);
+                items.forEach(item => {
+                    const itemEl = document.createElement('div');
+                    itemEl.className = 'cart-item';
+                    itemEl.innerHTML = `
+                        <div class="cart-item-name">${item.name}</div>
+                        <div class="cart-controls">
+                            <button class="cart-qty-btn" onclick="changeQty('${item.name}', -1)">-</button>
+                            <span class="cart-item-count">${item.count}</span>
+                            <button class="cart-qty-btn" onclick="changeQty('${item.name}', 1)">+</button>
+                        </div>
+                    `;
+                    group.appendChild(itemEl);
+                });
+                listContainer.appendChild(group);
+            });
+        }
+
+        // Первоначальный просчет счетчика при старте страницы
+        updateCartCounter();
+    </script>
 </body>
 </html>
