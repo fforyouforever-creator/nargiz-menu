@@ -6,7 +6,6 @@
     <meta name="color-scheme" content="light">
     <title>NARGIZ SWEETS MENU</title>
     
-    <!-- ПОДКЛЮЧЕНИЕ PWA -->
     <link rel="manifest" href="manifest.json">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -355,7 +354,7 @@
             border-radius: 6px;
             text-transform: uppercase;
             letter-spacing: 0.5px;
-            border-left: 3px solid var(--brand-green);
+            border-left: 3px solid var(--text-dark);
         }
 
         .cart-item {
@@ -482,7 +481,6 @@
         <button class="call-waiter-btn">XUSH KELIBSIZ!</button>
     </div>
 
-    <!-- ВЕРХНЯЯ НАВИГАЦИЯ (FAST FOOD УДАЛЕН) -->
     <div class="categories-nav">
         <a href="#" class="category-btn active" data-tab="pizza">PIZZA</a>
         <a href="#" class="category-btn" data-tab="sauces">ДОБАВКИ И СОУСЫ</a>
@@ -491,22 +489,20 @@
         <a href="#" class="category-btn disabled">РОЛЛЫ <span class="badge">СКОРО</span></a>
     </div>
 
-    <!-- 1. Вкладка PIZZA -->
     <div id="pizza" class="tab-content active">
         <div class="section-title">PIZZA</div>
         <div class="menu-grid">
             
-            <!-- Объединенная Карточка 1 (Бывшие N1 и N2) -->
             <div class="menu-card">
                 <img src="N1.jpg">
                 <div class="double-price-block">
                     <div class="price-zone left">
-                        <div class="zone-price-text"><span class="zone-size-label">O'RTA</span>60 000</div>
-                        <button class="btn-add-cart" onclick="addToCart('MARGARITA O\'RTA', 'PIZZA')">+</button>
+                        <div class="zone-price-text"><span class="zone-size-label">30см</span>65 000</div>
+                        <button class="btn-add-cart" onclick="addToCart('MARGARITA 30см', 'PIZZA')">+</button>
                     </div>
                     <div class="price-zone right">
-                        <div class="zone-price-text"><span class="zone-size-label">KATTA</span>65 000</div>
-                        <button class="btn-add-cart" onclick="addToCart('MARGARITA KATTA', 'PIZZA')">+</button>
+                        <div class="zone-price-text"><span class="zone-size-label">35см</span>72 000</div>
+                        <button class="btn-add-cart" onclick="addToCart('MARGARITA 35см', 'PIZZA')">+</button>
                     </div>
                 </div>
                 <div class="card-title-block">
@@ -514,17 +510,16 @@
                 </div>
             </div>
 
-            <!-- Объединенная Карточка 2 (Бывшие N3 и N4) -->
             <div class="menu-card">
                 <img src="N2.jpg">
                 <div class="double-price-block">
                     <div class="price-zone left">
-                        <div class="zone-price-text"><span class="zone-size-label">O'RTA</span>60 000</div>
-                        <button class="btn-add-cart" onclick="addToCart('MEXIKO O\'RTA', 'PIZZA')">+</button>
+                        <div class="zone-price-text"><span class="zone-size-label">30см</span>65 000</div>
+                        <button class="btn-add-cart" onclick="addToCart('MEXIKO 30см', 'PIZZA')">+</button>
                     </div>
                     <div class="price-zone right">
-                        <div class="zone-price-text"><span class="zone-size-label">KATTA</span>80 000</div>
-                        <button class="btn-add-cart" onclick="addToCart('MEXIKO KATTA', 'PIZZA')">+</button>
+                        <div class="zone-price-text"><span class="zone-size-label">35см</span>86 000</div>
+                        <button class="btn-add-cart" onclick="addToCart('MEXIKO 35см', 'PIZZA')">+</button>
                     </div>
                 </div>
                 <div class="card-title-block">
@@ -532,17 +527,16 @@
                 </div>
             </div>
 
-            <!-- Объединенная Карточка 3 (Бывшие N5 и N6) -->
             <div class="menu-card">
                 <img src="N3.jpg">
                 <div class="double-price-block">
                     <div class="price-zone left">
-                        <div class="zone-price-text"><span class="zone-size-label">O'RTA</span>55 000</div>
-                        <button class="btn-add-cart" onclick="addToCart('FOUR CHEESE O\'RTA', 'PIZZA')">+</button>
+                        <div class="zone-price-text"><span class="zone-size-label">30см</span>60 000</div>
+                        <button class="btn-add-cart" onclick="addToCart('FOUR CHEESE 30см', 'PIZZA')">+</button>
                     </div>
                     <div class="price-zone right">
-                        <div class="zone-price-text"><span class="zone-size-label">KATTA</span>75 000</div>
-                        <button class="btn-add-cart" onclick="addToCart('FOUR CHEESE KATTA', 'PIZZA')">+</button>
+                        <div class="zone-price-text"><span class="zone-size-label">35см</span>82 000</div>
+                        <button class="btn-add-cart" onclick="addToCart('FOUR CHEESE 35см', 'PIZZA')">+</button>
                     </div>
                 </div>
                 <div class="card-title-block">
@@ -550,17 +544,16 @@
                 </div>
             </div>
 
-            <!-- Объединенная Карточка 4 (Бывшие N7 и N8) -->
             <div class="menu-card">
                 <img src="N4.jpg">
                 <div class="double-price-block">
                     <div class="price-zone left">
-                        <div class="zone-price-text"><span class="zone-size-label">O'RTA</span>65 000</div>
-                        <button class="btn-add-cart" onclick="addToCart('CHICKEN BBQ O\'RTA', 'PIZZA')">+</button>
+                        <div class="zone-price-text"><span class="zone-size-label">30см</span>72 000</div>
+                        <button class="btn-add-cart" onclick="addToCart('CHICKEN BBQ 30см', 'PIZZA')">+</button>
                     </div>
                     <div class="price-zone right">
-                        <div class="zone-price-text"><span class="zone-size-label">KATTA</span>85 000</div>
-                        <button class="btn-add-cart" onclick="addToCart('CHICKEN BBQ KATTA', 'PIZZA')">+</button>
+                        <div class="zone-price-text"><span class="zone-size-label">35см</span>92 000</div>
+                        <button class="btn-add-cart" onclick="addToCart('CHICKEN BBQ 35см', 'PIZZA')">+</button>
                     </div>
                 </div>
                 <div class="card-title-block">
@@ -568,17 +561,16 @@
                 </div>
             </div>
 
-            <!-- Объединенная Карточка 5 (Бывшие N9 и N10) -->
             <div class="menu-card">
                 <img src="N5.jpg">
                 <div class="double-price-block">
                     <div class="price-zone left">
-                        <div class="zone-price-text"><span class="zone-size-label">O'RTA</span>58 000</div>
-                        <button class="btn-add-cart" onclick="addToCart('VEGETARIAN O\'RTA', 'PIZZA')">+</button>
+                        <div class="zone-price-text"><span class="zone-size-label">30см</span>64 000</div>
+                        <button class="btn-add-cart" onclick="addToCart('VEGETARIAN 30см', 'PIZZA')">+</button>
                     </div>
                     <div class="price-zone right">
-                        <div class="zone-price-text"><span class="zone-size-label">KATTA</span>78 000</div>
-                        <button class="btn-add-cart" onclick="addToCart('VEGETARIAN KATTA', 'PIZZA')">+</button>
+                        <div class="zone-price-text"><span class="zone-size-label">35см</span>84 000</div>
+                        <button class="btn-add-cart" onclick="addToCart('VEGETARIAN 35см', 'PIZZA')">+</button>
                     </div>
                 </div>
                 <div class="card-title-block">
@@ -586,138 +578,130 @@
                 </div>
             </div>
 
-            <!-- Объединенная Карточка 6 (Бывшие N11 и N12) -->
             <div class="menu-card">
                 <img src="N6.jpg">
                 <div class="double-price-block">
                     <div class="price-zone left">
-                        <div class="zone-price-text"><span class="zone-size-label">O'RTA</span>70 000</div>
-                        <button class="btn-add-cart" onclick="addToCart('COMBINED O\'RTA', 'PIZZA')">+</button>
+                        <div class="zone-price-text"><span class="zone-size-label">30см</span>76 000</div>
+                        <button class="btn-add-cart" onclick="addToCart('GOSHTLI 30см', 'PIZZA')">+</button>
                     </div>
                     <div class="price-zone right">
-                        <div class="zone-price-text"><span class="zone-size-label">KATTA</span>90 000</div>
-                        <button class="btn-add-cart" onclick="addToCart('COMBINED KATTA', 'PIZZA')">+</button>
+                        <div class="zone-price-text"><span class="zone-size-label">35см</span>96 000</div>
+                        <button class="btn-add-cart" onclick="addToCart('GOSHTLI 35см', 'PIZZA')">+</button>
                     </div>
                 </div>
                 <div class="card-title-block">
-                    <div class="item-name">COMBINED</div>
+                    <div class="item-name">GOSHTLI (Мясная)</div>
                 </div>
             </div>
 
-             <!-- Объединенная Карточка 7 -->
-            <div class="menu-card">
+             <div class="menu-card">
                 <img src="N7.jpg">
                 <div class="double-price-block">
                     <div class="price-zone left">
-                        <div class="zone-price-text"><span class="zone-size-label">O'RTA</span>70 000</div>
-                        <button class="btn-add-cart" onclick="addToCart('COMBINED O\'RTA', 'PIZZA')">+</button>
+                        <div class="zone-price-text"><span class="zone-size-label">30см</span>72 000</div>
+                        <button class="btn-add-cart" onclick="addToCart('PEPPERONI 30см', 'PIZZA')">+</button>
                     </div>
                     <div class="price-zone right">
-                        <div class="zone-price-text"><span class="zone-size-label">KATTA</span>90 000</div>
-                        <button class="btn-add-cart" onclick="addToCart('COMBINED KATTA', 'PIZZA')">+</button>
+                        <div class="zone-price-text"><span class="zone-size-label">35см</span>92 000</div>
+                        <button class="btn-add-cart" onclick="addToCart('PEPPERONI 35см', 'PIZZA')">+</button>
                     </div>
                 </div>
                 <div class="card-title-block">
-                    <div class="item-name">COMBINED</div>
+                    <div class="item-name">PEPPERONI</div>
                 </div>
             </div>
 
-            <!-- Объединенная Карточка 8 -->
             <div class="menu-card">
                 <img src="N8.jpg">
                 <div class="double-price-block">
                     <div class="price-zone left">
-                        <div class="zone-price-text"><span class="zone-size-label">O'RTA</span>70 000</div>
-                        <button class="btn-add-cart" onclick="addToCart('COMBINED O\'RTA', 'PIZZA')">+</button>
+                        <div class="zone-price-text"><span class="zone-size-label">30см</span>75 000</div>
+                        <button class="btn-add-cart" onclick="addToCart('ASSORTI 30см', 'PIZZA')">+</button>
                     </div>
                     <div class="price-zone right">
-                        <div class="zone-price-text"><span class="zone-size-label">KATTA</span>90 000</div>
-                        <button class="btn-add-cart" onclick="addToCart('COMBINED KATTA', 'PIZZA')">+</button>
+                        <div class="zone-price-text"><span class="zone-size-label">35см</span>95 000</div>
+                        <button class="btn-add-cart" onclick="addToCart('ASSORTI 35см', 'PIZZA')">+</button>
                     </div>
                 </div>
                 <div class="card-title-block">
-                    <div class="item-name">COMBINED</div>
+                    <div class="item-name">ASSORTI</div>
                 </div>
             </div>
 
-            <!-- Объединенная Карточка 9 -->
             <div class="menu-card">
                 <img src="N9.jpg">
                 <div class="double-price-block">
                     <div class="price-zone left">
-                        <div class="zone-price-text"><span class="zone-size-label">O'RTA</span>70 000</div>
-                        <button class="btn-add-cart" onclick="addToCart('COMBINED O\'RTA', 'PIZZA')">+</button>
+                        <div class="zone-price-text"><span class="zone-size-label">30см</span>75 000</div>
+                        <button class="btn-add-cart" onclick="addToCart('KAVKAZ 30см', 'PIZZA')">+</button>
                     </div>
                     <div class="price-zone right">
-                        <div class="zone-price-text"><span class="zone-size-label">KATTA</span>90 000</div>
-                        <button class="btn-add-cart" onclick="addToCart('COMBINED KATTA', 'PIZZA')">+</button>
+                        <div class="zone-price-text"><span class="zone-size-label">35см</span>95 000</div>
+                        <button class="btn-add-cart" onclick="addToCart('KAVKAZ 35см', 'PIZZA')">+</button>
                     </div>
                 </div>
                 <div class="card-title-block">
-                    <div class="item-name">COMBINED</div>
+                    <div class="item-name">KAVKAZ</div>
                 </div>
             </div>
 
-            <!-- Объединенная Карточка 10 -->
             <div class="menu-card">
                 <img src="N10.jpg">
                 <div class="double-price-block">
                     <div class="price-zone left">
-                        <div class="zone-price-text"><span class="zone-size-label">O'RTA</span>70 000</div>
-                        <button class="btn-add-cart" onclick="addToCart('COMBINED O\'RTA', 'PIZZA')">+</button>
+                        <div class="zone-price-text"><span class="zone-size-label">30см</span>75 000</div>
+                        <button class="btn-add-cart" onclick="addToCart('SEZAR 30см', 'PIZZA')">+</button>
                     </div>
                     <div class="price-zone right">
-                        <div class="zone-price-text"><span class="zone-size-label">KATTA</span>90 000</div>
-                        <button class="btn-add-cart" onclick="addToCart('COMBINED KATTA', 'PIZZA')">+</button>
+                        <div class="zone-price-text"><span class="zone-size-label">35см</span>95 000</div>
+                        <button class="btn-add-cart" onclick="addToCart('SEZAR 35см', 'PIZZA')">+</button>
                     </div>
                 </div>
                 <div class="card-title-block">
-                    <div class="item-name">COMBINED</div>
+                    <div class="item-name">SEZAR</div>
                 </div>
             </div>
 
-            <!-- Объединенная Карточка 11 -->
             <div class="menu-card">
                 <img src="N11.jpg">
                 <div class="double-price-block">
                     <div class="price-zone left">
-                        <div class="zone-price-text"><span class="zone-size-label">O'RTA</span>70 000</div>
-                        <button class="btn-add-cart" onclick="addToCart('COMBINED O\'RTA', 'PIZZA')">+</button>
+                        <div class="zone-price-text"><span class="zone-size-label">30см</span>75 000</div>
+                        <button class="btn-add-cart" onclick="addToCart('CHILI 30см', 'PIZZA')">+</button>
                     </div>
                     <div class="price-zone right">
-                        <div class="zone-price-text"><span class="zone-size-label">KATTA</span>90 000</div>
-                        <button class="btn-add-cart" onclick="addToCart('COMBINED KATTA', 'PIZZA')">+</button>
+                        <div class="zone-price-text"><span class="zone-size-label">35см</span>95 000</div>
+                        <button class="btn-add-cart" onclick="addToCart('CHILI 35см', 'PIZZA')">+</button>
                     </div>
                 </div>
                 <div class="card-title-block">
-                    <div class="item-name">COMBINED</div>
+                    <div class="item-name">CHILI</div>
                 </div>
             </div>
 
-            <!-- Объединенная Карточка 12 -->
             <div class="menu-card">
                 <img src="N12.jpg">
                 <div class="double-price-block">
                     <div class="price-zone left">
-                        <div class="zone-price-text"><span class="zone-size-label">O'RTA</span>70 000</div>
-                        <button class="btn-add-cart" onclick="addToCart('COMBINED O\'RTA', 'PIZZA')">+</button>
+                        <div class="zone-price-text"><span class="zone-size-label">30см</span>75 000</div>
+                        <button class="btn-add-cart" onclick="addToCart('TUNETS 30см', 'PIZZA')">+</button>
                     </div>
                     <div class="price-zone right">
-                        <div class="zone-price-text"><span class="zone-size-label">KATTA</span>90 000</div>
-                        <button class="btn-add-cart" onclick="addToCart('COMBINED KATTA', 'PIZZA')">+</button>
+                        <div class="zone-price-text"><span class="zone-size-label">35см</span>95 000</div>
+                        <button class="btn-add-cart" onclick="addToCart('TUNETS 35см', 'PIZZA')">+</button>
                     </div>
                 </div>
                 <div class="card-title-block">
-                    <div class="item-name">COMBINED</div>
+                    <div class="item-name">TUNETS</div>
                 </div>
             </div>
             
-           <!-- Карточка 13 (Без разделительных полос) -->
             <div class="menu-card">
                 <img src="N13.jpg">
                 <div class="double-price-block">
                     <div class="price-zone" style="justify-content: space-between; padding: 12px;">
-                        <div class="zone-price-text" style="font-size: 15px;">95 000 so'm</div>
+                        <div class="zone-price-text" style="font-size: 15px;">99 000 so'm</div>
                         <button class="btn-add-cart" onclick="addToCart('Хачапури', 'PIZZA')">+</button>
                     </div>
                 </div>
@@ -729,7 +713,6 @@
         </div>
     </div>
 
-    <!-- 2. Вкладка ДОБАВКИ И СОУСЫ -->
     <div id="sauces" class="tab-content">
         <div class="section-title">ДОБАВКИ И СОУСЫ</div>
         <div class="menu-grid">
@@ -748,7 +731,6 @@
         </div>
     </div>
 
-    <!-- 3. Вкладка ГОРЯЧИЕ НАПИТКИ -->
     <div id="hot-drinks" class="tab-content">
         <div class="section-title">ГОРЯЧИЕ НАПИТКИ</div>
         <div class="menu-grid">
@@ -767,7 +749,6 @@
         </div>
     </div>
 
-    <!-- 4. Вкладка ХОЛОДНЫЕ НАПИТКИ -->
     <div id="cold-drinks" class="tab-content">
         <div class="section-title">ХОЛОДНЫЕ НАПИТКИ</div>
         <div class="menu-grid">
@@ -840,6 +821,9 @@
         function saveCart() {
             localStorage.setItem('menu_cart', JSON.stringify(cart));
             updateCartCounter();
+            if (document.getElementById('cartModal').style.display === 'flex') {
+                renderCart();
+            }
         }
 
         function updateCartCounter() {
@@ -865,13 +849,36 @@
                     cart = cart.filter(i => i.name !== itemName);
                 }
                 saveCart();
-                renderCartList(); 
             }
         }
 
-        function renderCartList() {
+        function openCart() {
+            document.getElementById('cartModal').style.display = 'flex';
+            renderCart();
+        }
+
+        function closeCart() {
+            document.getElementById('cartModal').style.display = 'none';
+        }
+
+        // Исправлено: Очистка не срабатывала при пустой корзине
+        function showConfirmModal() {
+            if (cart.length === 0) return;
+            document.getElementById('confirmModal').style.display = 'flex';
+        }
+
+        function confirmClearCart(shouldClear) {
+            if (shouldClear) {
+                cart = [];
+                saveCart();
+                closeCart();
+            }
+            document.getElementById('confirmModal').style.display = 'none';
+        }
+
+        function renderCart() {
             const listContainer = document.getElementById('cartItemsList');
-            listContainer.innerHTML = ''; 
+            listContainer.innerHTML = '';
 
             if (cart.length === 0) {
                 listContainer.innerHTML = '<div class="empty-cart-text">Savat bo\'sh / Корзина пуста</div>';
@@ -880,46 +887,37 @@
 
             const groups = {};
             cart.forEach(item => {
-                if (!groups[item.category]) groups[item.category] = [];
+                if (!groups[item.category]) {
+                    groups[item.category] = [];
+                }
                 groups[item.category].push(item);
             });
 
             for (const category in groups) {
-                const catGroup = document.createElement('div');
-                catGroup.className = 'cart-category-group';
-                catGroup.innerHTML = `<div class="cart-category-title">${category}</div>`;
-                listContainer.appendChild(catGroup);
+                const groupDiv = document.createElement('div');
+                groupDiv.className = 'cart-category-group';
+                groupDiv.innerHTML = `<div class="cart-category-title">${category}</div>`;
 
                 groups[category].forEach(item => {
-                    const itemRow = document.createElement('div');
-                    itemRow.className = 'cart-item';
-                    itemRow.innerHTML = `
+                    const itemDiv = document.createElement('div');
+                    itemDiv.className = 'cart-item';
+                    
+                    // Безопасное экранирование строк для JS кнопок
+                    const safeName = item.name.replace(/'/g, "\\'");
+                    
+                    itemDiv.innerHTML = `
                         <div class="cart-item-name">${item.name}</div>
                         <div class="cart-controls">
-                            <button class="cart-qty-btn" onclick="changeQty('${item.name}', -1)">-</button>
-                            <div class="cart-item-count">${item.count}</div>
-                            <button class="cart-qty-btn" onclick="changeQty('${item.name}', 1)">+</button>
+                            <button class="cart-qty-btn" onclick="changeQty('${safeName}', -1)">-</button>
+                            <span class="cart-item-count">${item.count}</span>
+                            <button class="cart-qty-btn" onclick="changeQty('${safeName}', 1)">+</button>
                         </div>
                     `;
-                    listContainer.appendChild(itemRow);
+                    groupDiv.appendChild(itemDiv);
                 });
+
+                listContainer.appendChild(groupDiv);
             }
-        }
-
-        function openCart() { renderCartList(); document.getElementById('cartModal').style.display = 'flex'; }
-        function closeCart() { document.getElementById('cartModal').style.display = 'none'; }
-        function showConfirmModal() { document.getElementById('confirmModal').style.display = 'flex'; }
-
-        function confirmClearCart(isConfirmed) {
-            document.getElementById('confirmModal').style.display = 'none';
-            if (isConfirmed) { cart = []; saveCart(); closeCart(); }
-        }
-
-        window.onclick = function(event) {
-            const cartModal = document.getElementById('cartModal');
-            const confirmModal = document.getElementById('confirmModal');
-            if (event.target === cartModal) closeCart();
-            if (event.target === confirmModal) document.getElementById('confirmModal').style.display = 'none';
         }
 
         updateCartCounter();
