@@ -183,6 +183,11 @@
             object-fit: cover;
             background-color: #eaeaea;
         }
+        
+        /* Стили для кликабельных картинок пиццы */
+        .pizza-clickable-img {
+            cursor: pointer;
+        }
 
         .img-placeholder {
             width: 100%;
@@ -200,7 +205,6 @@
             padding: 10px;
         }
 
-        /* ДВУХЗОННЫЙ БЛОК ЦЕН (АККУРАТНЫЕ ЛИНИИ) */
         .double-price-block {
             display: flex;
             background-color: var(--card-info-bg);
@@ -216,7 +220,7 @@
         }
 
         .price-zone.left {
-            border-right: 1px solid rgba(0, 0, 0, 0.08); /* Мягкая дизайнерская линия между ценами */
+            border-right: 1px solid rgba(0, 0, 0, 0.08);
         }
 
         .zone-price-text {
@@ -255,16 +259,15 @@
             transform: scale(0.9);
         }
 
-        /* БЛОК НАЗВАНИЯ В САМОМ НИЗУ (КРУПНЕЕ И ПО ЦЕНТРУ) */
         .card-title-block {
             padding: 12px;
             background-color: var(--card-info-bg);
-            text-align: center; /* Центрирование названия */
-            border-top: 1px solid rgba(0, 0, 0, 0.08); /* Тонкая линия отделяет фотку/цены от названия */
+            text-align: center;
+            border-top: 1px solid rgba(0, 0, 0, 0.08);
         }
 
         .item-name {
-            font-size: 16px; /* Увеличенный размер */
+            font-size: 16px;
             color: #121212; 
             font-weight: 700;
             line-height: 1.3;
@@ -290,6 +293,7 @@
             gap: 8px;
         }
 
+        /* МОДАЛЬНЫЕ ОКНА */
         .cart-modal {
             position: fixed;
             top: 0; left: 0;
@@ -471,6 +475,42 @@
             background-color: #eee;
             color: #333;
         }
+
+        /* НОВОЕ: СТИЛИ ДЛЯ ОКНА ПРОСМОТРА КАРТИНКИ ПИЦЦЫ */
+        .image-viewer-modal {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-color: rgba(0, 0, 0, 0.85);
+            z-index: 2000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+        }
+        .image-viewer-content {
+            position: relative;
+            width: 90%;
+            max-width: 500px;
+        }
+        .image-viewer-content img {
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+            display: block;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.5);
+        }
+        .close-viewer-btn {
+            position: absolute;
+            top: -45px;
+            right: 0;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 36px;
+            cursor: pointer;
+            line-height: 1;
+            padding: 5px;
+        }
     </style>
 </head>
 <body>
@@ -494,7 +534,7 @@
         <div class="menu-grid">
             
             <div class="menu-card">
-                <img src="N1.jpg">
+                <img src="N1.jpg" class="pizza-clickable-img" data-large="N1-1.jpg">
                 <div class="double-price-block">
                     <div class="price-zone left">
                         <div class="zone-price-text"><span class="zone-size-label">30см</span>78 000</div>
@@ -511,7 +551,7 @@
             </div>
 
             <div class="menu-card">
-                <img src="N2.jpg">
+                <img src="N2.jpg" class="pizza-clickable-img" data-large="N2-2.jpg">
                 <div class="double-price-block">
                     <div class="price-zone left">
                         <div class="zone-price-text"><span class="zone-size-label">30см</span>100 000</div>
@@ -528,7 +568,7 @@
             </div>
 
             <div class="menu-card">
-                <img src="N3.jpg">
+                <img src="N3.jpg" class="pizza-clickable-img" data-large="N3-2.jpg">
                 <div class="double-price-block">
                     <div class="price-zone left">
                         <div class="zone-price-text"><span class="zone-size-label">30см</span>55 000</div>
@@ -545,7 +585,7 @@
             </div>
 
             <div class="menu-card">
-                <img src="N4.jpg">
+                <img src="N4.jpg" class="pizza-clickable-img" data-large="N4-4.jpg">
                 <div class="double-price-block">
                     <div class="price-zone left">
                         <div class="zone-price-text"><span class="zone-size-label">30см</span>68 000</div>
@@ -562,7 +602,7 @@
             </div>
 
             <div class="menu-card">
-                <img src="N5.jpg">
+                <img src="N5.jpg" class="pizza-clickable-img" data-large="N5-5.jpg">
                 <div class="double-price-block">
                     <div class="price-zone left">
                         <div class="zone-price-text"><span class="zone-size-label">30см</span>65 000</div>
@@ -579,7 +619,7 @@
             </div>
 
             <div class="menu-card">
-                <img src="N6.jpg">
+                <img src="N6.jpg" class="pizza-clickable-img" data-large="N6-6.jpg">
                 <div class="double-price-block">
                     <div class="price-zone left">
                         <div class="zone-price-text"><span class="zone-size-label">30см</span>75 000</div>
@@ -596,7 +636,7 @@
             </div>
 
              <div class="menu-card">
-                <img src="N7.jpg">
+                <img src="N7.jpg" class="pizza-clickable-img" data-large="N7-7.jpg">
                 <div class="double-price-block">
                     <div class="price-zone left">
                         <div class="zone-price-text"><span class="zone-size-label">30см</span>80 000</div>
@@ -613,7 +653,7 @@
             </div>
 
             <div class="menu-card">
-                <img src="N8.jpg">
+                <img src="N8.jpg" class="pizza-clickable-img" data-large="N8-8.jpg">
                 <div class="double-price-block">
                     <div class="price-zone left">
                         <div class="zone-price-text"><span class="zone-size-label">30см</span>85 000</div>
@@ -630,7 +670,7 @@
             </div>
 
             <div class="menu-card">
-                <img src="N9.jpg">
+                <img src="N9.jpg" class="pizza-clickable-img" data-large="N9-9.jpg">
                 <div class="double-price-block">
                     <div class="price-zone left">
                         <div class="zone-price-text"><span class="zone-size-label">30см</span>70 000</div>
@@ -647,7 +687,7 @@
             </div>
 
             <div class="menu-card">
-                <img src="N10.jpg">
+                <img src="N10.jpg" class="pizza-clickable-img" data-large="N10-10.jpg">
                 <div class="double-price-block">
                     <div class="price-zone left">
                         <div class="zone-price-text"><span class="zone-size-label">30см</span>80 000</div>
@@ -664,7 +704,7 @@
             </div>
 
             <div class="menu-card">
-                <img src="N11.jpg">
+                <img src="N11.jpg" class="pizza-clickable-img" data-large="N11-11.jpg">
                 <div class="double-price-block">
                     <div class="price-zone left">
                         <div class="zone-price-text"><span class="zone-size-label">30см</span>82 000</div>
@@ -681,7 +721,7 @@
             </div>
 
             <div class="menu-card">
-                <img src="N12.jpg">
+                <img src="N12.jpg" class="pizza-clickable-img" data-large="N12-12.jpg">
                 <div class="double-price-block">
                     <div class="price-zone left">
                         <div class="zone-price-text"><span class="zone-size-label">30см</span>75 000</div>
@@ -713,12 +753,10 @@
         </div>
     </div>
 
-<!-- 2. Вкладка ДОБАВКИ И СОУСЫ -->
 <div id="sauces" class="tab-content">
     <div class="section-title">ДОБАВКИ И СОУСЫ</div>
     <div class="menu-grid">
         <div class="menu-card">
-            <!-- ИСПРАВЛЕНО: Добавлен правильный тег картинки -->
             <img src="D1.jpg" alt="Картофель Фри">
             
             <div class="double-price-block">
@@ -796,6 +834,13 @@
         </div>
     </div>
 
+    <div id="imageViewerModal" class="image-viewer-modal" onclick="closeImageViewer()">
+        <div class="image-viewer-content" onclick="event.stopPropagation()">
+            <button class="close-viewer-btn" onclick="closeImageViewer()">&times;</button>
+            <img id="viewerImage" src="" alt="Пицца">
+        </div>
+    </div>
+
     <script>
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
@@ -844,90 +889,116 @@
             saveCart();
         }
 
-        function changeQty(itemName, change) {
-            const item = cart.find(item => item.name === itemName);
-            if (item) {
-                item.count += change;
-                if (item.count <= 0) {
-                    cart = cart.filter(i => i.name !== itemName);
-                }
-                saveCart();
-            }
-        }
-
         function openCart() {
             document.getElementById('cartModal').style.display = 'flex';
             renderCart();
         }
-
         function closeCart() {
             document.getElementById('cartModal').style.display = 'none';
         }
-
-        // Исправлено: Очистка не срабатывала при пустой корзине
         function showConfirmModal() {
-            if (cart.length === 0) return;
             document.getElementById('confirmModal').style.display = 'flex';
         }
-
-        function confirmClearCart(shouldClear) {
-            if (shouldClear) {
+        function confirmClearCart(yes) {
+            document.getElementById('confirmModal').style.display = 'none';
+            if (yes) {
                 cart = [];
                 saveCart();
                 closeCart();
             }
-            document.getElementById('confirmModal').style.display = 'none';
         }
 
         function renderCart() {
-            const listContainer = document.getElementById('cartItemsList');
-            listContainer.innerHTML = '';
-
+            const list = document.getElementById('cartItemsList');
+            list.innerHTML = '';
             if (cart.length === 0) {
-                listContainer.innerHTML = '<div class="empty-cart-text">Savat bo\'sh / Корзина пуста</div>';
+                list.innerHTML = '<div class="empty-cart-text">Savat bo\'sh / Корзина пуста</div>';
                 return;
             }
-
             const groups = {};
             cart.forEach(item => {
-                if (!groups[item.category]) {
-                    groups[item.category] = [];
-                }
+                if (!groups[item.category]) groups[item.category] = [];
                 groups[item.category].push(item);
             });
-
-            for (const category in groups) {
+            for (const cat in groups) {
                 const groupDiv = document.createElement('div');
                 groupDiv.className = 'cart-category-group';
-                groupDiv.innerHTML = `<div class="cart-category-title">${category}</div>`;
-
-                groups[category].forEach(item => {
-                    const itemDiv = document.createElement('div');
-                    itemDiv.className = 'cart-item';
-                    
-                    // Безопасное экранирование строк для JS кнопок
-                    const safeName = item.name.replace(/'/g, "\\'");
-                    
-                    itemDiv.innerHTML = `
+                groupDiv.innerHTML = `<div class="cart-category-title">${cat}</div>`;
+                groups[cat].forEach(item => {
+                    const row = document.createElement('div');
+                    row.className = 'cart-item';
+                    row.innerHTML = `
                         <div class="cart-item-name">${item.name}</div>
                         <div class="cart-controls">
-                            <button class="cart-qty-btn" onclick="changeQty('${safeName}', -1)">-</button>
+                            <button class="cart-qty-btn" onclick="changeQty('${item.name}', -1)">-</button>
                             <span class="cart-item-count">${item.count}</span>
-                            <button class="cart-qty-btn" onclick="changeQty('${safeName}', 1)">+</button>
+                            <button class="cart-qty-btn" onclick="changeQty('${item.name}', 1)">+</button>
                         </div>
                     `;
-                    groupDiv.appendChild(itemDiv);
+                    groupDiv.appendChild(row);
                 });
-
-                listContainer.appendChild(groupDiv);
+                list.appendChild(groupDiv);
             }
         }
 
+        function changeQty(name, amount) {
+            const item = cart.find(i => i.name === name);
+            if (item) {
+                item.count += amount;
+                if (item.count <= 0) {
+                    cart = cart.filter(i => i.name !== name);
+                }
+                saveCart();
+            }
+        }
+
+        // Инициализация счетчика при старте страницы
         updateCartCounter();
+
+
+        // ЛОГИКА ОКОН ДЛЯ ПРОСМОТРА КАРТИНКИ ПИЦЦЫ С ЗАЩИТОЙ ОТ СКРОЛЛА
+        let touchStartX = 0;
+        let touchStartY = 0;
+
+        document.querySelectorAll('.pizza-clickable-img').forEach(img => {
+            // Запоминаем точку, где палец коснулся экрана
+            img.addEventListener('touchstart', (e) => {
+                touchStartX = e.changedTouches[0].screenX;
+                touchStartY = e.changedTouches[0].screenY;
+            }, { passive: true });
+
+            // Проверяем при отпускании пальца
+            img.addEventListener('touchend', (e) => {
+                const touchEndX = e.changedTouches[0].screenX;
+                const touchEndY = e.changedTouches[0].screenY;
+                
+                // Если палец сместился более чем на 10 пикселей — это скролл, игнорируем!
+                if (Math.abs(touchEndX - touchStartX) < 10 && Math.abs(touchEndY - touchStartY) < 10) {
+                    const largeSrc = img.getAttribute('data-large');
+                    openImageViewer(largeSrc);
+                }
+            }, { passive: true });
+
+            // На всякий случай для десктопа (мышка)
+            img.addEventListener('click', (e) => {
+                // Если событие вызвано мышкой, а не тачем
+                if (e.pointerType === 'mouse' || !e.pointerType) {
+                    const largeSrc = img.getAttribute('data-large');
+                    openImageViewer(largeSrc);
+                }
+            });
+        });
+
+        function openImageViewer(src) {
+            const viewer = document.getElementById('imageViewerModal');
+            const img = document.getElementById('viewerImage');
+            img.src = src;
+            viewer.style.display = 'flex';
+        }
+
+        function closeImageViewer() {
+            document.getElementById('imageViewerModal').style.display = 'none';
+        }
     </script>
 </body>
 </html>
-
-
-
-
