@@ -177,11 +177,37 @@
             box-shadow: 0 4px 12px rgba(0,0,0,0.05);
         }
 
-        .menu-card img {
+        /* Контейнер для кликабельной картинки с лупой */
+        .menu-card-img-container {
+            position: relative;
             width: 100%;
             height: 160px;
+            cursor: pointer;
+            overflow: hidden;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .menu-card-img-container img {
+            width: 100%;
+            height: 100%;
             object-fit: cover;
             background-color: #eaeaea;
+            display: block;
+        }
+
+        /* Иконка лупы поверх картинки товара */
+        .zoom-indicator {
+            position: absolute;
+            bottom: 8px;
+            right: 8px;
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            font-size: 12px;
+            padding: 4px 6px;
+            border-radius: 6px;
+            pointer-events: none;
+            font-family: sans-serif;
+            line-height: 1;
         }
 
         .img-placeholder {
@@ -216,7 +242,7 @@
         }
 
         .price-zone.left {
-            border-right: 1px solid rgba(0, 0, 0, 0.08); /* Мягкая дизайнерская линия между ценами */
+            border-right: 1px solid rgba(0, 0, 0, 0.08); 
         }
 
         .zone-price-text {
@@ -259,12 +285,12 @@
         .card-title-block {
             padding: 12px;
             background-color: var(--card-info-bg);
-            text-align: center; /* Центрирование названия */
-            border-top: 1px solid rgba(0, 0, 0, 0.08); /* Тонкая линия отделяет фотку/цены от названия */
+            text-align: center; 
+            border-top: 1px solid rgba(0, 0, 0, 0.08); 
         }
 
         .item-name {
-            font-size: 16px; /* Увеличенный размер */
+            font-size: 16px; 
             color: #121212; 
             font-weight: 700;
             line-height: 1.3;
@@ -471,6 +497,55 @@
             background-color: #eee;
             color: #333;
         }
+
+        /* МОДАЛЬНОЕ ОКНО ДЛЯ ДЕТАЛЬНОГО ПРОСМОТРА КАРТИНКИ */
+        .image-viewer-modal {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-color: rgba(0, 0, 0, 0.85);
+            z-index: 2000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+        }
+
+        .image-viewer-wrapper {
+            position: relative;
+            width: 90%;
+            max-width: 500px;
+            animation: popIn 0.25s ease-out;
+        }
+
+        .image-viewer-img {
+            width: 100%;
+            height: auto;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            display: block;
+            object-fit: contain;
+        }
+
+        .image-viewer-close {
+            position: absolute;
+            top: -45px;
+            right: 0;
+            background: rgba(255, 255, 255, 0.25);
+            color: white;
+            border: none;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            font-size: 24px;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            line-height: 1;
+        }
     </style>
 </head>
 <body>
@@ -494,7 +569,10 @@
         <div class="menu-grid">
             
             <div class="menu-card">
-                <img src="N1.jpg">
+                <div class="menu-card-img-container" onmousedown="handleImgTouchStart(event)" onmouseup="handleImgTouchEnd(event, 'N1-1.jpg')" ontouchstart="handleImgTouchStart(event)" ontouchend="handleImgTouchEnd(event, 'N1-1.jpg')">
+                    <img src="N1.jpg">
+                    <span class="zoom-indicator">🔍</span>
+                </div>
                 <div class="double-price-block">
                     <div class="price-zone left">
                         <div class="zone-price-text"><span class="zone-size-label">30см</span>78 000</div>
@@ -511,7 +589,10 @@
             </div>
 
             <div class="menu-card">
-                <img src="N2.jpg">
+                <div class="menu-card-img-container" onmousedown="handleImgTouchStart(event)" onmouseup="handleImgTouchEnd(event, 'N2-2.jpg')" ontouchstart="handleImgTouchStart(event)" ontouchend="handleImgTouchEnd(event, 'N2-2.jpg')">
+                    <img src="N2.jpg">
+                    <span class="zoom-indicator">🔍</span>
+                </div>
                 <div class="double-price-block">
                     <div class="price-zone left">
                         <div class="zone-price-text"><span class="zone-size-label">30см</span>100 000</div>
@@ -528,7 +609,10 @@
             </div>
 
             <div class="menu-card">
-                <img src="N3.jpg">
+                <div class="menu-card-img-container" onmousedown="handleImgTouchStart(event)" onmouseup="handleImgTouchEnd(event, 'N3-3.jpg')" ontouchstart="handleImgTouchStart(event)" ontouchend="handleImgTouchEnd(event, 'N3-3.jpg')">
+                    <img src="N3.jpg">
+                    <span class="zoom-indicator">🔍</span>
+                </div>
                 <div class="double-price-block">
                     <div class="price-zone left">
                         <div class="zone-price-text"><span class="zone-size-label">30см</span>55 000</div>
@@ -545,7 +629,10 @@
             </div>
 
             <div class="menu-card">
-                <img src="N4.jpg">
+                <div class="menu-card-img-container" onmousedown="handleImgTouchStart(event)" onmouseup="handleImgTouchEnd(event, 'N4-4.jpg')" ontouchstart="handleImgTouchStart(event)" ontouchend="handleImgTouchEnd(event, 'N4-4.jpg')">
+                    <img src="N4.jpg">
+                    <span class="zoom-indicator">🔍</span>
+                </div>
                 <div class="double-price-block">
                     <div class="price-zone left">
                         <div class="zone-price-text"><span class="zone-size-label">30см</span>68 000</div>
@@ -562,7 +649,10 @@
             </div>
 
             <div class="menu-card">
-                <img src="N5.jpg">
+                <div class="menu-card-img-container" onmousedown="handleImgTouchStart(event)" onmouseup="handleImgTouchEnd(event, 'N5-5.jpg')" ontouchstart="handleImgTouchStart(event)" ontouchend="handleImgTouchEnd(event, 'N5-5.jpg')">
+                    <img src="N5.jpg">
+                    <span class="zoom-indicator">🔍</span>
+                </div>
                 <div class="double-price-block">
                     <div class="price-zone left">
                         <div class="zone-price-text"><span class="zone-size-label">30см</span>65 000</div>
@@ -579,7 +669,10 @@
             </div>
 
             <div class="menu-card">
-                <img src="N6.jpg">
+                <div class="menu-card-img-container" onmousedown="handleImgTouchStart(event)" onmouseup="handleImgTouchEnd(event, 'N6-6.jpg')" ontouchstart="handleImgTouchStart(event)" ontouchend="handleImgTouchEnd(event, 'N6-6.jpg')">
+                    <img src="N6.jpg">
+                    <span class="zoom-indicator">🔍</span>
+                </div>
                 <div class="double-price-block">
                     <div class="price-zone left">
                         <div class="zone-price-text"><span class="zone-size-label">30см</span>75 000</div>
@@ -591,12 +684,15 @@
                     </div>
                 </div>
                 <div class="card-title-block">
-                    <div class="item-name">ОХОТНИЧЬЯ </div>
+                    <div class="item-name">ОХОТНИЧЬЯ</div>
                 </div>
             </div>
 
              <div class="menu-card">
-                <img src="N7.jpg">
+                <div class="menu-card-img-container" onmousedown="handleImgTouchStart(event)" onmouseup="handleImgTouchEnd(event, 'N7-7.jpg')" ontouchstart="handleImgTouchStart(event)" ontouchend="handleImgTouchEnd(event, 'N7-7.jpg')">
+                    <img src="N7.jpg">
+                    <span class="zoom-indicator">🔍</span>
+                </div>
                 <div class="double-price-block">
                     <div class="price-zone left">
                         <div class="zone-price-text"><span class="zone-size-label">30см</span>80 000</div>
@@ -613,7 +709,10 @@
             </div>
 
             <div class="menu-card">
-                <img src="N8.jpg">
+                <div class="menu-card-img-container" onmousedown="handleImgTouchStart(event)" onmouseup="handleImgTouchEnd(event, 'N8-8.jpg')" ontouchstart="handleImgTouchStart(event)" ontouchend="handleImgTouchEnd(event, 'N8-8.jpg')">
+                    <img src="N8.jpg">
+                    <span class="zoom-indicator">🔍</span>
+                </div>
                 <div class="double-price-block">
                     <div class="price-zone left">
                         <div class="zone-price-text"><span class="zone-size-label">30см</span>85 000</div>
@@ -630,7 +729,10 @@
             </div>
 
             <div class="menu-card">
-                <img src="N9.jpg">
+                <div class="menu-card-img-container" onmousedown="handleImgTouchStart(event)" onmouseup="handleImgTouchEnd(event, 'N9-9.jpg')" ontouchstart="handleImgTouchStart(event)" ontouchend="handleImgTouchEnd(event, 'N9-9.jpg')">
+                    <img src="N9.jpg">
+                    <span class="zoom-indicator">🔍</span>
+                </div>
                 <div class="double-price-block">
                     <div class="price-zone left">
                         <div class="zone-price-text"><span class="zone-size-label">30см</span>70 000</div>
@@ -647,7 +749,10 @@
             </div>
 
             <div class="menu-card">
-                <img src="N10.jpg">
+                <div class="menu-card-img-container" onmousedown="handleImgTouchStart(event)" onmouseup="handleImgTouchEnd(event, 'N10-10.jpg')" ontouchstart="handleImgTouchStart(event)" ontouchend="handleImgTouchEnd(event, 'N10-10.jpg')">
+                    <img src="N10.jpg">
+                    <span class="zoom-indicator">🔍</span>
+                </div>
                 <div class="double-price-block">
                     <div class="price-zone left">
                         <div class="zone-price-text"><span class="zone-size-label">30см</span>80 000</div>
@@ -664,7 +769,10 @@
             </div>
 
             <div class="menu-card">
-                <img src="N11.jpg">
+                <div class="menu-card-img-container" onmousedown="handleImgTouchStart(event)" onmouseup="handleImgTouchEnd(event, 'N11-11.jpg')" ontouchstart="handleImgTouchStart(event)" ontouchend="handleImgTouchEnd(event, 'N11-11.jpg')">
+                    <img src="N11.jpg">
+                    <span class="zoom-indicator">🔍</span>
+                </div>
                 <div class="double-price-block">
                     <div class="price-zone left">
                         <div class="zone-price-text"><span class="zone-size-label">30см</span>82 000</div>
@@ -681,7 +789,10 @@
             </div>
 
             <div class="menu-card">
-                <img src="N12.jpg">
+                <div class="menu-card-img-container" onmousedown="handleImgTouchStart(event)" onmouseup="handleImgTouchEnd(event, 'N12-12.jpg')" ontouchstart="handleImgTouchStart(event)" ontouchend="handleImgTouchEnd(event, 'N12-12.jpg')">
+                    <img src="N12.jpg">
+                    <span class="zoom-indicator">🔍</span>
+                </div>
                 <div class="double-price-block">
                     <div class="price-zone left">
                         <div class="zone-price-text"><span class="zone-size-label">30см</span>75 000</div>
@@ -698,7 +809,10 @@
             </div>
             
             <div class="menu-card">
-                <img src="N13.jpg">
+                <div class="menu-card-img-container" onmousedown="handleImgTouchStart(event)" onmouseup="handleImgTouchEnd(event, 'N13-13.jpg')" ontouchstart="handleImgTouchStart(event)" ontouchend="handleImgTouchEnd(event, 'N13-13.jpg')">
+                    <img src="N13.jpg">
+                    <span class="zoom-indicator">🔍</span>
+                </div>
                 <div class="double-price-block">
                     <div class="price-zone" style="justify-content: space-between; padding: 12px;">
                         <div class="zone-price-text" style="font-size: 15px;">75 000 so'm</div>
@@ -713,26 +827,26 @@
         </div>
     </div>
 
-<!-- 2. Вкладка ДОБАВКИ И СОУСЫ -->
-<div id="sauces" class="tab-content">
-    <div class="section-title">ДОБАВКИ И СОУСЫ</div>
-    <div class="menu-grid">
-        <div class="menu-card">
-            <!-- ИСПРАВЛЕНО: Добавлен правильный тег картинки -->
-            <img src="D1.jpg" alt="Картофель Фри">
-            
-            <div class="double-price-block">
-                <div class="price-zone">
-                    <div class="zone-price-text">22 000 so'm</div>
-                    <button class="btn-add-cart" onclick="addToCart('КАРТОФЕЛЬ ФРИ', 'ДОБАВКИ И СОУСЫ')">+</button>
+    <div id="sauces" class="tab-content">
+        <div class="section-title">ДОБАВКИ И СОУСЫ</div>
+        <div class="menu-grid">
+            <div class="menu-card">
+                <div class="menu-card-img-container" onmousedown="handleImgTouchStart(event)" onmouseup="handleImgTouchEnd(event, 'D1-1.jpg')" ontouchstart="handleImgTouchStart(event)" ontouchend="handleImgTouchEnd(event, 'D1-1.jpg')">
+                    <img src="D1.jpg" alt="Картофель Фри">
+                    <span class="zoom-indicator">🔍</span>
                 </div>
-            </div>
-            <div class="card-title-block">
-                <div class="item-name">КАРТОФЕЛЬ ФРИ</div>
+                <div class="double-price-block">
+                    <div class="price-zone">
+                        <div class="zone-price-text">22 000 so'm</div>
+                        <button class="btn-add-cart" onclick="addToCart('КАРТОФЕЛЬ ФРИ', 'ДОБАВКИ И СОУСЫ')">+</button>
+                    </div>
+                </div>
+                <div class="card-title-block">
+                    <div class="item-name">КАРТОФЕЛЬ ФРИ</div>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
     <div id="hot-drinks" class="tab-content">
         <div class="section-title">ГОРЯЧИЕ НАПИТКИ</div>
@@ -793,6 +907,13 @@
                 <button class="confirm-btn yes" onclick="confirmClearCart(true)">Ha / Да</button>
                 <button class="confirm-btn no" onclick="confirmClearCart(false)">Yo'q / Нет</button>
             </div>
+        </div>
+    </div>
+
+    <div id="imageViewerModal" class="image-viewer-modal" onclick="closeImageViewer()">
+        <div class="image-viewer-wrapper" onclick="event.stopPropagation()">
+            <button class="image-viewer-close" onclick="closeImageViewer()">&times;</button>
+            <img id="imageViewerSrc" class="image-viewer-img" src="" alt="Детальное фото">
         </div>
     </div>
 
@@ -864,7 +985,6 @@
             document.getElementById('cartModal').style.display = 'none';
         }
 
-        // Исправлено: Очистка не срабатывала при пустой корзине
         function showConfirmModal() {
             if (cart.length === 0) return;
             document.getElementById('confirmModal').style.display = 'flex';
@@ -880,54 +1000,77 @@
         }
 
         function renderCart() {
-            const listContainer = document.getElementById('cartItemsList');
-            listContainer.innerHTML = '';
-
+            const list = document.getElementById('cartItemsList');
+            list.innerHTML = '';
             if (cart.length === 0) {
-                listContainer.innerHTML = '<div class="empty-cart-text">Savat bo\'sh / Корзина пуста</div>';
+                list.innerHTML = '<div class="empty-cart-text">Savat bo\'sh / Корзина пуста</div>';
                 return;
             }
-
             const groups = {};
             cart.forEach(item => {
-                if (!groups[item.category]) {
-                    groups[item.category] = [];
-                }
+                if (!groups[item.category]) groups[item.category] = [];
                 groups[item.category].push(item);
             });
-
-            for (const category in groups) {
+            for (const cat in groups) {
                 const groupDiv = document.createElement('div');
                 groupDiv.className = 'cart-category-group';
-                groupDiv.innerHTML = `<div class="cart-category-title">${category}</div>`;
-
-                groups[category].forEach(item => {
+                groupDiv.innerHTML = `<div class="cart-category-title">${cat}</div>`;
+                groups[cat].forEach(item => {
                     const itemDiv = document.createElement('div');
                     itemDiv.className = 'cart-item';
-                    
-                    // Безопасное экранирование строк для JS кнопок
-                    const safeName = item.name.replace(/'/g, "\\'");
-                    
                     itemDiv.innerHTML = `
                         <div class="cart-item-name">${item.name}</div>
                         <div class="cart-controls">
-                            <button class="cart-qty-btn" onclick="changeQty('${safeName}', -1)">-</button>
+                            <button class="cart-qty-btn" onclick="changeQty('${item.name}', -1)">-</button>
                             <span class="cart-item-count">${item.count}</span>
-                            <button class="cart-qty-btn" onclick="changeQty('${safeName}', 1)">+</button>
+                            <button class="cart-qty-btn" onclick="changeQty('${item.name}', 1)">+</button>
                         </div>
                     `;
                     groupDiv.appendChild(itemDiv);
                 });
-
-                listContainer.appendChild(groupDiv);
+                list.appendChild(groupDiv);
             }
+        }
+
+        // --- ЛОГИКА УМНОГО ПРОСМОТРА ИЗОБРАЖЕНИЙ (ЗАЩИТА ОТ СКРОЛЛА) ---
+        let touchStartX = 0;
+        let touchStartY = 0;
+        let touchStartTime = 0;
+
+        function handleImgTouchStart(e) {
+            const touch = e.touches ? e.touches[0] : e;
+            touchStartX = touch.clientX;
+            touchStartY = touch.clientY;
+            touchStartTime = Date.now();
+        }
+
+        function handleImgTouchEnd(e, bigImgSrc) {
+            const touch = e.changedTouches ? e.changedTouches[0] : e;
+            const dx = Math.abs(touch.clientX - touchStartX);
+            const dy = Math.abs(touch.clientY - touchStartY);
+            const timeDiff = Date.now() - touchStartTime;
+
+            // Если палец сдвинулся больше чем на 8 пикселей или нажатие длилось дольше 300мс — это скролл
+            if (dx > 8 || dy > 8 || timeDiff > 300) {
+                return; 
+            }
+
+            // Быстрый и чистый тап — открываем большую картинку
+            openImageViewer(bigImgSrc);
+        }
+
+        function openImageViewer(src) {
+            const modal = document.getElementById('imageViewerModal');
+            const modalImg = document.getElementById('imageViewerSrc');
+            modalImg.src = src;
+            modal.style.display = 'flex';
+        }
+
+        function closeImageViewer() {
+            document.getElementById('imageViewerModal').style.display = 'none';
         }
 
         updateCartCounter();
     </script>
 </body>
 </html>
-
-
-
-
