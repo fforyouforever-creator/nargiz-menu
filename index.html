@@ -201,10 +201,9 @@
             padding: 10px;
         }
 
-        /* ДВУХЗОННЫЙ БЛОК ЦЕН (КАК НА СКРИНШОТЕ) */
+        /* ДВУХЗОННЫЙ БЛОК ЦЕН (АККУРАТНЫЕ ЛИНИИ) */
         .double-price-block {
             display: flex;
-            border-bottom: 2px solid var(--main-red);
             background-color: var(--card-info-bg);
         }
 
@@ -218,7 +217,7 @@
         }
 
         .price-zone.left {
-            border-right: 2px solid var(--main-red);
+            border-right: 1px solid rgba(0, 0, 0, 0.08); /* Мягкая дизайнерская линия между ценами */
         }
 
         .zone-price-text {
@@ -257,14 +256,16 @@
             transform: scale(0.9);
         }
 
-        /* БЛОК НАЗВАНИЯ В САМОМ НИЗУ КАРТОЧКИ */
+        /* БЛОК НАЗВАНИЯ В САМОМ НИЗУ (КРУПНЕЕ И ПО ЦЕНТРУ) */
         .card-title-block {
             padding: 12px;
             background-color: var(--card-info-bg);
+            text-align: center; /* Центрирование названия */
+            border-top: 1px solid rgba(0, 0, 0, 0.08); /* Тонкая линия отделяет фотку/цены от названия */
         }
 
         .item-name {
-            font-size: 14px;
+            font-size: 16px; /* Увеличенный размер */
             color: #121212; 
             font-weight: 700;
             line-height: 1.3;
@@ -603,17 +604,17 @@
                 </div>
             </div>
 
-            <!-- Карточка 13 (Осталась одиночной, как была) -->
+           <!-- Карточка 13 (Без разделительных полос) -->
             <div class="menu-card">
                 <img src="N13.jpg">
                 <div class="double-price-block">
-                    <div class="price-zone" style="justify-content: space-between;">
-                        <div class="zone-price-text">95 000 so'm</div>
-                        <button class="btn-add-cart" onclick="addToCart('PIZZA ШАБЛОН 13', 'PIZZA')">+</button>
+                    <div class="price-zone" style="justify-content: space-between; padding: 12px;">
+                        <div class="zone-price-text" style="font-size: 15px;">95 000 so'm</div>
+                        <button class="btn-add-cart" onclick="addToCart('Хачапури', 'PIZZA')">+</button>
                     </div>
                 </div>
                 <div class="card-title-block">
-                    <div class="item-name">PIZZA ШАБЛОН 13</div>
+                    <div class="item-name">Хачапури</div>
                 </div>
             </div>
 
