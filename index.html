@@ -207,6 +207,10 @@
             box-shadow: 0 2px 6px rgba(0,0,0,0.2);
             font-size: 16px;
             z-index: 10;
+            opacity: 0.75;
+            transition: opacity 0.2s ease; 
+            .zoom-icon:active {
+                opacity: 1;
             pointer-events: none; /* Клик проходит сквозь лупу на контейнер */
         }
 
