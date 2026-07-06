@@ -175,6 +175,39 @@
             display: flex;
             flex-direction: column;
             box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            position: relative;
+        }
+
+        .img-container {
+            position: relative;
+            width: 100%;
+            height: 160px;
+            cursor: pointer;
+        }
+
+        .img-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            background-color: #eaeaea;
+        }
+
+        /* Иконка лупы в левом верхнем углу только для пицц N1-N12 */
+        .zoom-icon {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background-color: rgba(255, 255, 255, 0.85);
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+            font-size: 16px;
+            z-index: 10;
+            pointer-events: none; /* Клик проходит сквозь лупу на контейнер */
         }
 
         .menu-card img {
@@ -469,6 +502,42 @@
             background-color: #eee;
             color: #333;
         }
+
+        /* Модальное окно для детального просмотра изображения */
+        .image-preview-modal {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 2000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+        }
+        .image-preview-content {
+            position: relative;
+            max-width: 90%;
+            max-height: 85vh;
+        }
+        .image-preview-content img {
+            width: 100%;
+            height: auto;
+            max-height: 85vh;
+            object-fit: contain;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(255,255,255,0.1);
+        }
+        .close-preview-btn {
+            position: absolute;
+            top: -40px;
+            right: 0;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 35px;
+            cursor: pointer;
+            line-height: 1;
+        }
     </style>
 </head>
 <body>
@@ -487,12 +556,18 @@
         <a href="#" class="category-btn disabled">РОЛЛЫ <span class="badge">СКОРО</span></a>
     </div>
 
+    <!-- 1. Вкладка PIZZA (Генерируется динамически с 1 по 12, Хачапури статичен) -->
     <div id="pizza" class="tab-content active">
         <div class="section-title">PIZZA</div>
         <div class="menu-grid" id="pizza-container">
             
+            <!-- Сюда JS вставит карточки от 1 до 12 -->
+
+            <!-- Хачапури (13-й элемент) жестко зафиксирован в верстке вне всяких циклов. Без лупы! -->
             <div class="menu-card">
-                <img src="N13.jpg">
+                <div class="img-container" style="cursor: default;">
+                    <img src="N13.jpg">
+                </div>
                 <div class="double-price-block">
                     <div class="price-zone" style="justify-content: space-between; padding: 12px;">
                         <div class="zone-price-text" style="font-size: 15px;">75 000 so'm</div>
@@ -507,6 +582,7 @@
         </div>
     </div>
 
+    <!-- 2. Вкладка ДОБАВКИ И СОУСЫ -->
     <div id="sauces" class="tab-content">
         <div class="section-title">ДОБАВКИ И СОУСЫ</div>
         <div class="menu-grid">
@@ -525,6 +601,7 @@
         </div>
     </div>
 
+    <!-- 3. Вкладка ГОРЯЧИЕ НАПИТКИ -->
     <div id="hot-drinks" class="tab-content">
         <div class="section-title">ГОРЯЧИЕ НАПИТКИ</div>
         <div class="menu-grid">
@@ -543,6 +620,7 @@
         </div>
     </div>
 
+    <!-- 4. Вкладка ХОЛОДНЫЕ НАПИТКИ -->
     <div id="cold-drinks" class="tab-content">
         <div class="section-title">ХОЛОДНЫЕ НАПИТКИ</div>
         <div class="menu-grid">
@@ -587,6 +665,14 @@
         </div>
     </div>
 
+    <!-- Модальное окно для показа N1-1.jpg картинок -->
+    <div id="imagePreviewModal" class="image-preview-modal" onclick="closeImagePreview()">
+        <div class="image-preview-content" onclick="event.stopPropagation()">
+            <button class="close-preview-btn" onclick="closeImagePreview()">&times;</button>
+            <img id="previewTargetImage" src="" alt="Превью">
+        </div>
+    </div>
+
     <script>
         // Данные только для пицц строго от 1 до 12
         const pizzaData = [
@@ -604,12 +690,15 @@
             { id: 12, name: "ЦЕЗАРЬ", price30: "75 000", price35: "85 000" }
         ];
 
-        // Рендеринг пицц от 1 до 12 в начало контейнера перед Хачапури
+        // Рендеринг пицц от 1 до 12 в начало контейнера перед Хачапури. Добавлены лупа и клик для открытия детального фото.
         const pizzaContainer = document.getElementById('pizza-container');
         pizzaData.forEach(pizza => {
             const cardHTML = `
                 <div class="menu-card">
-                    <img src="N${pizza.id}.jpg">
+                    <div class="img-container" onclick="openImagePreview(${pizza.id})">
+                        <div class="zoom-icon">🔍</div>
+                        <img src="N${pizza.id}.jpg">
+                    </div>
                     <div class="double-price-block">
                         <div class="price-zone left">
                             <div class="zone-price-text"><span class="zone-size-label">30см</span>${pizza.price30}</div>
@@ -627,6 +716,18 @@
             `;
             pizzaContainer.insertAdjacentHTML('afterbegin', cardHTML);
         });
+
+        // Функции для просмотра детальных изображений пицц (N1-1.jpg, N2-2.jpg...)
+        function openImagePreview(id) {
+            const previewModal = document.getElementById('imagePreviewModal');
+            const previewImg = document.getElementById('previewTargetImage');
+            previewImg.src = `N${id}-${id}.jpg`;
+            previewModal.style.display = 'flex';
+        }
+
+        function closeImagePreview() {
+            document.getElementById('imagePreviewModal').style.display = 'none';
+        }
 
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
@@ -743,7 +844,6 @@
             });
         }
 
-        // Первоначальный просчет счетчика при старте страницы
         updateCartCounter();
     </script>
 </body>
